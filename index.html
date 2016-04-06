@@ -148,84 +148,45 @@
     <main>
         
 
+<div class="slider">
+    <ul class="slides">
+    
+       <li>
+           <a href="/">
+               <img class="slider-image" src="https://pixabay.com/static/uploads/photo/2016/02/07/14/06/material-1184760_960_720.png">
+               <div class="caption center-align">
+                 <h4>This is our big Tagline!</h3>
+                 <h5 class="light grey-text text-lighten-3">Here&#39;s our small slogan.</h5>
+               </div>
+           </a>
+       </li>
+    
+       <li>
+           <a href="javascript:;">
+               <img class="slider-image" src="https://pixabay.com/static/uploads/photo/2016/02/07/14/06/material-1184760_960_720.png">
+               <div class="caption left-align">
+                 <h4>Left Aligned Caption</h3>
+                 <h5 class="light grey-text text-lighten-3">Here&#39;s our small slogan.</h5>
+               </div>
+           </a>
+       </li>
+    
+       <li>
+           <a href="javascript:;">
+               <img class="slider-image" src="https://pixabay.com/static/uploads/photo/2016/02/07/14/06/material-1184760_960_720.png">
+               <div class="caption right-align">
+                 <h4>Right Aligned Caption</h3>
+                 <h5 class="light grey-text text-lighten-3">Here&#39;s our small slogan.</h5>
+               </div>
+           </a>
+       </li>
+    
+   </ul>
+ </div>
+
 
 
 <div id="article-list" class="container main-container">
-    
-        <article class="simple-article">
-        <div class="card">
-            <div class="card-content">
-                <div class="article-title">
-                    
-    
-        <h1 class="indigo-link-context"><a href="/2016/04/05/test2/">test2</a></h1>
-    
-
-
-                </div>
-
-                <time class="pink-link-context" datetime="2016-04-05T08:12:00.000Z"><a href="/2016/04/05/test2/">2016-04-05</a></time>
-
-                
-
-
-                
-            </div>
-
-            
-        </div>
-</article>
-
-    
-        <article class="simple-article">
-        <div class="card">
-            <div class="card-content">
-                <div class="article-title">
-                    
-    
-        <h1 class="indigo-link-context"><a href="/2016/04/05/test1/">test1</a></h1>
-    
-
-
-                </div>
-
-                <time class="pink-link-context" datetime="2016-04-05T07:56:55.000Z"><a href="/2016/04/05/test1/">2016-04-05</a></time>
-
-                
-
-
-                
-            </div>
-
-            
-        </div>
-</article>
-
-    
-        <article class="simple-article">
-        <div class="card">
-            <div class="card-content">
-                <div class="article-title">
-                    
-    
-        <h1 class="indigo-link-context"><a href="/2016/04/05/test/">test</a></h1>
-    
-
-
-                </div>
-
-                <time class="pink-link-context" datetime="2016-04-05T07:46:08.000Z"><a href="/2016/04/05/test/">2016-04-05</a></time>
-
-                
-
-
-                
-            </div>
-
-            
-        </div>
-</article>
-
     
         <article class="simple-article">
         <div class="card">
@@ -281,6 +242,34 @@
 
     </main>
     <footer class="page-footer indigo darken-1">
+    
+    <div class="container">
+        <div class="row">
+            
+            <div class="social-group col m3 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="https://github.com/jxsd" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+            </div>
+            
+
+            
+            <div class="col m9 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="https://github.com/jxsd" target="_blank">Github地址（测试友情链接）</a>
+                
+            </div>
+            
+        </div>
+    </div>
     
 
     <div class="footer-copyright pink-link-context">
@@ -367,6 +356,9 @@
         });
         $('.indicator').addClass('pink lighten-2');
 
+        
+        // 添加new标签
+        $('.menu-reading,.menu-about').append('<span class="new badge pink"></span>');
         
     });
 })(jQuery);

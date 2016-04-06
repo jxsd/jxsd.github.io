@@ -170,24 +170,6 @@
                 <div class="collapsible-body">
                     <div class="collection">
                         
-                            <a href="/2016/04/05/test2/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-04-05T08:12:00.000Z">2016-04-05</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                test2
-                            </a>
-                        
-                            <a href="/2016/04/05/test1/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-04-05T07:56:55.000Z">2016-04-05</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                test1
-                            </a>
-                        
-                            <a href="/2016/04/05/test/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-04-05T07:46:08.000Z">2016-04-05</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                test
-                            </a>
-                        
                             <a href="/2016/04/05/hello-world/" class="collection-item grey-text text-darken-1">
                                 <time datetime="2016-04-05T04:13:51.506Z">2016-04-05</time>
                                 <span>&nbsp;&nbsp;&nbsp;</span>
@@ -215,6 +197,34 @@
 
     </main>
     <footer class="page-footer indigo darken-1">
+    
+    <div class="container">
+        <div class="row">
+            
+            <div class="social-group col m3 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="https://github.com/jxsd" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+            </div>
+            
+
+            
+            <div class="col m9 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="https://github.com/jxsd" target="_blank">Github地址（测试友情链接）</a>
+                
+            </div>
+            
+        </div>
+    </div>
     
 
     <div class="footer-copyright pink-link-context">
@@ -301,6 +311,9 @@
         });
         $('.indicator').addClass('pink lighten-2');
 
+        
+        // 添加new标签
+        $('.menu-reading,.menu-about').append('<span class="new badge pink"></span>');
         
     });
 })(jQuery);
