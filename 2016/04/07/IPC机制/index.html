@@ -7,13 +7,16 @@
 
     
 
-    <title>归档：2016/4 | 守夜人</title>
+    <title>IPC机制 | 守夜人</title>
     <meta name="author" content="caisen">
+    
+    <meta name="description" content="IPC（inter-process communication）进程间通信
+2.2 多进程模式2.2.1开启多进程模式使用：给四大组件在manifest中指定android：process属性，android：process=”:remote”简写，实际上会自动识别加上包名，而且以：开头的进程为私有">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="IPC机制"/>
     <meta property="og:site_name" content="caisen"/>
 
     
@@ -185,46 +188,67 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper brown darken-1">
-        <span class="breadcrumb">当前位置（归档）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/技术/">技术</a><a class="breadcrumb" href="/categories/技术/android/">android</a><a class="breadcrumb" href="/categories/技术/android/android开发艺术探索/">android开发艺术探索</a>
+
+
         
 
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>IPC机制</h1>
+    
 
 
-    <ul class="collapsible mt-0" data-collapsible="accordion">
+            </div>
+            <time class="light-green-link-context" datetime="2016-04-07T04:10:44.000Z"><a href="/2016/04/07/IPC机制/">2016-04-07</a></time>
+
+            
+    <div class="tags-row">
         
+            <a href="/tags/笔记/" class="chip light-green">笔记</a>
         
-            <li>
-                <div class="collapsible-header active">
-                    <i class="fa fa-archive"></i>2016
-                </div>
-                <div class="collapsible-body">
-                    <div class="collection">
-                        
-                            <a href="/2016/04/07/IPC机制/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-04-07T04:10:44.000Z">2016-04-07</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                IPC机制
-                            </a>
-                        
-                            <a href="/2016/04/05/hello-world/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-04-05T04:13:51.506Z">2016-04-05</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                Hello World
-                            </a>
-                        
-                    </div>
-                </div>
-            </li>
+            <a href="/tags/android/" class="chip light-green">android</a>
         
-    </ul>
+    </div>
+
+
+            <div class="toc light-green-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#2-2-多进程模式"><span class="section table-of-contents-text">2.2 多进程模式</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-2-1开启多进程模式"><span class="section table-of-contents-text">2.2.1开启多进程模式</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-2-2多进程模式的运行机制"><span class="section table-of-contents-text">2.2.2多进程模式的运行机制</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#2-3-IPC基础"><span class="section table-of-contents-text">2.3 IPC基础</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-3-1-Serializable"><span class="section table-of-contents-text">2.3.1 Serializable</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-3-2-Parcelable"><span class="section table-of-contents-text">2.3.2 Parcelable</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-3-3-Binder"><span class="section table-of-contents-text">2.3.3 Binder</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#2-4-IPC方式"><span class="section table-of-contents-text">2.4 IPC方式</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-4-1使用Bundle"><span class="section table-of-contents-text">2.4.1使用Bundle</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-4-2使用文件共享"><span class="section table-of-contents-text">2.4.2使用文件共享</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-4-3使用Messager"><span class="section table-of-contents-text">2.4.3使用Messager</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-4-4使用AIDL"><span class="section table-of-contents-text">2.4.4使用AIDL</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-4-5使用ContentProvider"><span class="section table-of-contents-text">2.4.5使用ContentProvider</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-4-6使用Socket"><span class="section table-of-contents-text">2.4.6使用Socket</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#2-5-Binder连接池"><span class="section table-of-contents-text">2.5 Binder连接池</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#2-2-选用合适的IPC方式"><span class="section table-of-contents-text">2.2 选用合适的IPC方式</span></a></li></ol>
+</div>
+
+
+            <div class="entry light-green-link-context">
+                <p>IPC（inter-process communication）进程间通信</p>
+<h2 id="2-2-多进程模式"><a href="#2-2-多进程模式" class="headerlink" title="2.2 多进程模式"></a>2.2 多进程模式</h2><h3 id="2-2-1开启多进程模式"><a href="#2-2-1开启多进程模式" class="headerlink" title="2.2.1开启多进程模式"></a>2.2.1开启多进程模式</h3><p>使用：给四大组件在manifest中指定android：process属性，<br>android：process=”:remote”简写，实际上会自动识别加上包名，而且以：开头的进程为私有进程，其它应用不能进来。<br>android：process=”com.xx.remote”全写，会被其它应用通过ShareUID方式进来。</p>
+<h3 id="2-2-2多进程模式的运行机制"><a href="#2-2-2多进程模式的运行机制" class="headerlink" title="2.2.2多进程模式的运行机制"></a>2.2.2多进程模式的运行机制</h3><p>所有运行在不同进程中的四大组件，只要他们之间需要通过内存来访问数据，都会共享失败，这就是多进程的影响。<br>影响：<br>1.静态成员和单例模式完全失效（每个进程都分配了一个虚拟机，不同的虚拟机访问同一个类对象会产生多个副本）<br>2.线程同步机制完全失效（不同的进程锁住的不是同一个对象）<br>3.SharedPreferences的可靠性降低（SharedPreferences不支持多个进程去执行写操作，）<br>4.application会多次创建（同一个进程的组件是属于同一个虚拟机和同一个application的）</p>
+<h2 id="2-3-IPC基础"><a href="#2-3-IPC基础" class="headerlink" title="2.3 IPC基础"></a>2.3 IPC基础</h2><h3 id="2-3-1-Serializable"><a href="#2-3-1-Serializable" class="headerlink" title="2.3.1 Serializable"></a>2.3.1 Serializable</h3><p>序列化就是变成流的形式<br>实现Serializable接口并声明一个serialVersionUID，serialVersionUID不是必须的，不声明照样实现序列化，但是反序列化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public class User implements Serializable &#123;</span><br><span class="line">    private static final long serialVersionUID = 519067123721295773L;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-3-2-Parcelable"><a href="#2-3-2-Parcelable" class="headerlink" title="2.3.2 Parcelable"></a>2.3.2 Parcelable</h3><h3 id="2-3-3-Binder"><a href="#2-3-3-Binder" class="headerlink" title="2.3.3 Binder"></a>2.3.3 Binder</h3><p><img src="http://upload-images.jianshu.io/upload_images/657598-bfd4bd10f1c579a5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Binder的工作机制"></p>
+<h2 id="2-4-IPC方式"><a href="#2-4-IPC方式" class="headerlink" title="2.4 IPC方式"></a>2.4 IPC方式</h2><h3 id="2-4-1使用Bundle"><a href="#2-4-1使用Bundle" class="headerlink" title="2.4.1使用Bundle"></a>2.4.1使用Bundle</h3><h3 id="2-4-2使用文件共享"><a href="#2-4-2使用文件共享" class="headerlink" title="2.4.2使用文件共享"></a>2.4.2使用文件共享</h3><h3 id="2-4-3使用Messager"><a href="#2-4-3使用Messager" class="headerlink" title="2.4.3使用Messager"></a>2.4.3使用Messager</h3><h3 id="2-4-4使用AIDL"><a href="#2-4-4使用AIDL" class="headerlink" title="2.4.4使用AIDL"></a>2.4.4使用AIDL</h3><h3 id="2-4-5使用ContentProvider"><a href="#2-4-5使用ContentProvider" class="headerlink" title="2.4.5使用ContentProvider"></a>2.4.5使用ContentProvider</h3><h3 id="2-4-6使用Socket"><a href="#2-4-6使用Socket" class="headerlink" title="2.4.6使用Socket"></a>2.4.6使用Socket</h3><h2 id="2-5-Binder连接池"><a href="#2-5-Binder连接池" class="headerlink" title="2.5 Binder连接池"></a>2.5 Binder连接池</h2><h2 id="2-2-选用合适的IPC方式"><a href="#2-2-选用合适的IPC方式" class="headerlink" title="2.2 选用合适的IPC方式"></a>2.2 选用合适的IPC方式</h2>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>
