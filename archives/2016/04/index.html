@@ -36,7 +36,7 @@
 <body>
     <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
 
-    <nav class="indigo">
+    <nav class="brown darken-1">
     <div class="nav-wrapper">
         <a href="#" data-activates="main-menu" class="button-collapse">
             <i class="fa fa-navicon"></i>
@@ -87,7 +87,7 @@
                 
             </ul>
             <div>
-    <ul class="side-nav indigo darken-1" id="main-menu">
+    <ul class="side-nav brown darken-1" id="main-menu">
         
         <li class="side-user">
             <div class="row">
@@ -147,10 +147,26 @@
         
     </ul>
 
-    <ul class="side-nav indigo darken-1" id="category-menu">
+    <ul class="side-nav brown darken-1" id="category-menu">
     
 
             
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/技术/">
+                    技术 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/技术/android/">
+                    android <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
 
     </ul>
 </div>
@@ -164,7 +180,7 @@
     
 
 <nav class="page-nav hide-on-small-only">
-    <div class="nav-wrapper indigo">
+    <div class="nav-wrapper brown darken-1">
         <span class="breadcrumb">当前位置（归档）</span>
         
 
@@ -184,6 +200,12 @@
                 <div class="collapsible-body">
                     <div class="collection">
                         
+                            <a href="/2016/04/07/android开发艺术探索/" class="collection-item grey-text text-darken-1">
+                                <time datetime="2016-04-07T04:10:44.000Z">2016-04-07</time>
+                                <span>&nbsp;&nbsp;&nbsp;</span>
+                                android开发艺术探索
+                            </a>
+                        
                             <a href="/2016/04/05/hello-world/" class="collection-item grey-text text-darken-1">
                                 <time datetime="2016-04-05T04:13:51.506Z">2016-04-05</time>
                                 <span>&nbsp;&nbsp;&nbsp;</span>
@@ -200,20 +222,20 @@
 </div>
 
         <div class="fixed-action-btn float-sitemap">
-    <a class="btn-floating btn-large pink">
+    <a class="btn-floating btn-large light-green">
       <i class="fa fa-caret-square-o-up"></i>
     </a>
     <ul>
-      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
-      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="menu"><i class="fa fa-navicon"></i></a></li>
+      <li><a class="btn-return-top btn-floating waves-effect red" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse purple"  data-activates="main-menu" title="menu"><i class="fa fa-navicon"></i></a></li>
     </ul>
   </div>
 
     </main>
-    <footer class="page-footer indigo darken-1">
+    <footer class="page-footer brown darken-1 darken-1">
     
 
-    <div class="footer-copyright pink-link-context">
+    <div class="footer-copyright light-green-link-context">
         <div class="container">
             <p>haha</p>
             
@@ -295,11 +317,11 @@
         $('li.tab a').hover(function() {
             $(this).toggleClass('text-lighten-4');
         });
-        $('.indicator').addClass('pink lighten-2');
+        $('.indicator').addClass('light-green lighten-2');
 
         
         // 添加new标签
-        $('.menu-reading,.menu-about').append('<span class="new badge pink"></span>');
+        $('.menu-reading,.menu-about').append('<span class="new badge light-green"></span>');
         
     });
 })(jQuery);
