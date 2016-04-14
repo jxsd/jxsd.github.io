@@ -7,13 +7,15 @@
 
     
 
-    <title>归档：2016/3 | 守夜人</title>
+    <title>view的事件体系 | 守夜人</title>
     <meta name="author" content="caisen">
+    
+    <meta name="description" content="3.1 view的基础知识1.什么是view2.view的事件参数3.MotionEvent TouchSlop4.VelocityTracker GestureDetector Scroller3.2 view的滑动1.scrollTo scrollBy2.动画3.改变布局参数4.各种滑动方式的对">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="view的事件体系"/>
     <meta property="og:site_name" content="caisen"/>
 
     
@@ -201,52 +203,62 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper brown darken-1">
-        <span class="breadcrumb">当前位置（归档）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/技术/">技术</a><a class="breadcrumb" href="/categories/技术/android/">android</a><a class="breadcrumb" href="/categories/技术/android/android开发艺术探索/">android开发艺术探索</a>
+
+
         
 
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>view的事件体系</h1>
+    
 
 
-    <ul class="collapsible mt-0" data-collapsible="accordion">
+            </div>
+            <time class="light-green-link-context" datetime="2016-04-10T16:00:02.000Z"><a href="/2016/04/11/view的事件体系/">2016-04-11</a></time>
+
+            
+    <div class="tags-row">
         
+            <a href="/tags/笔记/" class="chip light-green">笔记</a>
         
-            <li>
-                <div class="collapsible-header active">
-                    <i class="fa fa-archive"></i>2016
-                </div>
-                <div class="collapsible-body">
-                    <div class="collection">
-                        
-                            <a href="/2016/03/24/jvm调优/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-03-23T20:52:12.000Z">2016-03-24</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                jvm调优
-                            </a>
-                        
-                            <a href="/2016/03/18/GC与内存分配/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-03-17T14:22:26.000Z">2016-03-18</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                GC与内存分配
-                            </a>
-                        
-                            <a href="/2016/03/13/java内存区域与内存溢出异常/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-03-13T08:21:41.000Z">2016-03-13</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                java内存区域与内存溢出异常
-                            </a>
-                        
-                    </div>
-                </div>
-            </li>
+            <a href="/tags/android/" class="chip light-green">android</a>
         
-    </ul>
+    </div>
+
+
+            <div class="toc light-green-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#3-1-view的基础知识"><span class="section table-of-contents-text">3.1 view的基础知识</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1-什么是view"><span class="section table-of-contents-text">1.什么是view</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-view的事件参数"><span class="section table-of-contents-text">2.view的事件参数</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#3-MotionEvent-TouchSlop"><span class="section table-of-contents-text">3.MotionEvent TouchSlop</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#4-VelocityTracker-GestureDetector-Scroller"><span class="section table-of-contents-text">4.VelocityTracker GestureDetector Scroller</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#3-2-view的滑动"><span class="section table-of-contents-text">3.2 view的滑动</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1-scrollTo-scrollBy"><span class="section table-of-contents-text">1.scrollTo scrollBy</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-动画"><span class="section table-of-contents-text">2.动画</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#3-改变布局参数"><span class="section table-of-contents-text">3.改变布局参数</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#4-各种滑动方式的对比"><span class="section table-of-contents-text">4.各种滑动方式的对比</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#3-3-弹性滑动"><span class="section table-of-contents-text">3.3 弹性滑动</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1-Scroller"><span class="section table-of-contents-text">1.Scroller</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-动画-1"><span class="section table-of-contents-text">2.动画</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#3-延时策略"><span class="section table-of-contents-text">3.延时策略</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#3-4-view的事件分发机制"><span class="section table-of-contents-text">3.4 view的事件分发机制</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1-点击事件的传递规则"><span class="section table-of-contents-text">1.点击事件的传递规则</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-事件分发的源码解析"><span class="section table-of-contents-text">2.事件分发的源码解析</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#3-5-view的滑动冲突"><span class="section table-of-contents-text">3.5 view的滑动冲突</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1-常见滑动冲突场景"><span class="section table-of-contents-text">1.常见滑动冲突场景</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-滑动冲突的处理规则"><span class="section table-of-contents-text">2.滑动冲突的处理规则</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#3-滑动冲突的解决方式"><span class="section table-of-contents-text">3.滑动冲突的解决方式</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry light-green-link-context">
+                <h2 id="3-1-view的基础知识"><a href="#3-1-view的基础知识" class="headerlink" title="3.1 view的基础知识"></a>3.1 view的基础知识</h2><h3 id="1-什么是view"><a href="#1-什么是view" class="headerlink" title="1.什么是view"></a>1.什么是view</h3><h3 id="2-view的事件参数"><a href="#2-view的事件参数" class="headerlink" title="2.view的事件参数"></a>2.view的事件参数</h3><h3 id="3-MotionEvent-TouchSlop"><a href="#3-MotionEvent-TouchSlop" class="headerlink" title="3.MotionEvent TouchSlop"></a>3.MotionEvent TouchSlop</h3><h3 id="4-VelocityTracker-GestureDetector-Scroller"><a href="#4-VelocityTracker-GestureDetector-Scroller" class="headerlink" title="4.VelocityTracker GestureDetector Scroller"></a>4.VelocityTracker GestureDetector Scroller</h3><h2 id="3-2-view的滑动"><a href="#3-2-view的滑动" class="headerlink" title="3.2 view的滑动"></a>3.2 view的滑动</h2><h3 id="1-scrollTo-scrollBy"><a href="#1-scrollTo-scrollBy" class="headerlink" title="1.scrollTo scrollBy"></a>1.scrollTo scrollBy</h3><h3 id="2-动画"><a href="#2-动画" class="headerlink" title="2.动画"></a>2.动画</h3><h3 id="3-改变布局参数"><a href="#3-改变布局参数" class="headerlink" title="3.改变布局参数"></a>3.改变布局参数</h3><h3 id="4-各种滑动方式的对比"><a href="#4-各种滑动方式的对比" class="headerlink" title="4.各种滑动方式的对比"></a>4.各种滑动方式的对比</h3><h2 id="3-3-弹性滑动"><a href="#3-3-弹性滑动" class="headerlink" title="3.3 弹性滑动"></a>3.3 弹性滑动</h2><h3 id="1-Scroller"><a href="#1-Scroller" class="headerlink" title="1.Scroller"></a>1.Scroller</h3><h3 id="2-动画-1"><a href="#2-动画-1" class="headerlink" title="2.动画"></a>2.动画</h3><h3 id="3-延时策略"><a href="#3-延时策略" class="headerlink" title="3.延时策略"></a>3.延时策略</h3><h2 id="3-4-view的事件分发机制"><a href="#3-4-view的事件分发机制" class="headerlink" title="3.4 view的事件分发机制"></a>3.4 view的事件分发机制</h2><h3 id="1-点击事件的传递规则"><a href="#1-点击事件的传递规则" class="headerlink" title="1.点击事件的传递规则"></a>1.点击事件的传递规则</h3><h3 id="2-事件分发的源码解析"><a href="#2-事件分发的源码解析" class="headerlink" title="2.事件分发的源码解析"></a>2.事件分发的源码解析</h3><h2 id="3-5-view的滑动冲突"><a href="#3-5-view的滑动冲突" class="headerlink" title="3.5 view的滑动冲突"></a>3.5 view的滑动冲突</h2><h3 id="1-常见滑动冲突场景"><a href="#1-常见滑动冲突场景" class="headerlink" title="1.常见滑动冲突场景"></a>1.常见滑动冲突场景</h3><h3 id="2-滑动冲突的处理规则"><a href="#2-滑动冲突的处理规则" class="headerlink" title="2.滑动冲突的处理规则"></a>2.滑动冲突的处理规则</h3><h3 id="3-滑动冲突的解决方式"><a href="#3-滑动冲突的解决方式" class="headerlink" title="3.滑动冲突的解决方式"></a>3.滑动冲突的解决方式</h3>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>
