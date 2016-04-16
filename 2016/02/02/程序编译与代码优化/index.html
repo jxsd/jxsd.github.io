@@ -10,7 +10,7 @@
     <title>程序编译与代码优化 | 守夜人</title>
     <meta name="author" content="caisen">
     
-    <meta name="description" content="sdafdsasdgdsga">
+    <meta name="description" content="Java语言的“编译期”是一段“不确定”的操作过程，因为它可能是指一个前端编译器把.java文件转变成.class文件的过程；也可能是指虚拟 机的后端运行期编译器（JIT编译器，Just In Time Compiler）把字节码变成机器码的过程；还可能是指使用静态提前编译器（AOT编译器，Ahea">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -245,12 +245,43 @@
 
 
             <div class="toc light-green-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#sdafdsasdgdsga"><span class="section table-of-contents-text">sdafdsasdgdsga</span></a></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#早期（编译期）优化"><span class="section table-of-contents-text">早期（编译期）优化</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#javac编译器"><span class="section table-of-contents-text">javac编译器</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#解析与填充符号表"><span class="section table-of-contents-text">解析与填充符号表</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#注解处理器"><span class="section table-of-contents-text">注解处理器</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#语义分析与字节码生成"><span class="section table-of-contents-text">语义分析与字节码生成</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Java语法糖"><span class="section table-of-contents-text">Java语法糖</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#泛型与类型擦除"><span class="section table-of-contents-text">泛型与类型擦除</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#自动装箱、拆箱与遍历循环"><span class="section table-of-contents-text">自动装箱、拆箱与遍历循环</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#条件编译"><span class="section table-of-contents-text">条件编译</span></a></li></ol></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#晚期（运行期）优化"><span class="section table-of-contents-text">晚期（运行期）优化</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#编译优化技术"><span class="section table-of-contents-text">编译优化技术</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#公共字表达式消除"><span class="section table-of-contents-text">公共字表达式消除</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#数组边界检查消除"><span class="section table-of-contents-text">数组边界检查消除</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#方法内联"><span class="section table-of-contents-text">方法内联</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#逃逸分析"><span class="section table-of-contents-text">逃逸分析</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Java与C-C-的编译器对比"><span class="section table-of-contents-text">Java与C/C++的编译器对比</span></a></li></ol></li></ol>
 </div>
 
 
             <div class="entry light-green-link-context">
-                <h1 id="sdafdsasdgdsga"><a href="#sdafdsasdgdsga" class="headerlink" title="sdafdsasdgdsga"></a>sdafdsasdgdsga</h1>
+                <p>Java语言的“编译期”是一段“不确定”的操作过程，因为它可能是指一个前端编译器把.java文件转变成.class文件的过程；也可能是指虚拟 机的后端运行期编译器（JIT编译器，Just In Time Compiler）把字节码变成机器码的过程；还可能是指使用静态提前编译器（AOT编译器，Ahead Of Time Compiler）直接把*.java文件编译成本地机器代码的过程。</p>
+<h1 id="早期（编译期）优化"><a href="#早期（编译期）优化" class="headerlink" title="早期（编译期）优化"></a>早期（编译期）优化</h1><h2 id="javac编译器"><a href="#javac编译器" class="headerlink" title="javac编译器"></a>javac编译器</h2><p>Sun Javac编译过程大致可以分为三个过程：</p>
+<p>解析与填充符号表过程<br>插入注解处理器的注解处理过程<br>分析与字节码生成过程</p>
+<h3 id="解析与填充符号表"><a href="#解析与填充符号表" class="headerlink" title="解析与填充符号表"></a>解析与填充符号表</h3><p>词法、语法分析</p>
+<p>词法分析是将源代码的字符流转变为标记（Token）集合，单个字符是程序编写过程的最小元素，而标记则是编译过程的最小元素，关键字、变量名、字面量和运算符都可以成为标记，如 int a = b +2这句代码包含了6个标记，分别是int、a、=、b、+、2。</p>
+<p>词法分析是根据Token序列来构造抽象语法树的过程，抽象语法树（AST，Abstract Syntax Tree）是一种用来描述程序代码语法结构的树形表示方式，语法树的每一个节点都代表着程序代码中的一个语法结构（Construct），例如包、类型、 修饰符、运算符、接口、返回值甚至连代码注释等都可以是一个语法结构。</p>
+<p>填充符号表</p>
+<p>符号表（Symbol Table）是由一组符号地址和符号信息构成的表格。符号表中所登记的信息在编译的不同阶段都要用到。在语义分析中，符号表所登记的内容将用于语义检查和产生中间代码。在目标代码生成阶段，当对符号名进行地址分配时，符号表是地址分配的依据。</p>
+<h3 id="注解处理器"><a href="#注解处理器" class="headerlink" title="注解处理器"></a>注解处理器</h3><p>注解与普通的Java代码一样，是在运行期间发挥作用的。插入式注解处理器的标准API在编译期间对注解进行处理。</p>
+<h3 id="语义分析与字节码生成"><a href="#语义分析与字节码生成" class="headerlink" title="语义分析与字节码生成"></a>语义分析与字节码生成</h3><p>语义分析的主要任务是对结构上正确的源程序进行上下文有关性质的审查，如进行类型审查。</p>
+<p>标注检查</p>
+<p>标注检查步骤检查的内容包括诸如变量使用前是否已被声明、变量与赋值之间的数据类型是否能够匹配，等等。</p>
+<p>数据及控制流分析</p>
+<p>数据及控制流分析是对程序上下文逻辑更进一步的验证，可以检查出诸如程序局部变量在使用前是否有赋值、方法的每条路径是否都有返回值、是否所有的受查异常都被正确处理了等问题。</p>
+<h2 id="Java语法糖"><a href="#Java语法糖" class="headerlink" title="Java语法糖"></a>Java语法糖</h2><h3 id="泛型与类型擦除"><a href="#泛型与类型擦除" class="headerlink" title="泛型与类型擦除"></a>泛型与类型擦除</h3><p>泛型的本质是参数化类型（Parameterized Type）的应用，也就是说所操作的数据类型被指定为一个参数。</p>
+<p>Java的泛型只在程序源码中存在，在编译后的字节码文件中，就已经被替换为原来的原生类型（Raw Type，也称为裸类型）了，并且在相应的地方插入了强制转型代码，因此对于运行期的Java语言来说，ArrayList与ArrayList就是同一 个类。所以说泛型技术实际上是Java语言的一颗语法糖，Java语言中的泛型实现方法称为类型擦除，基于这种方法实现的泛型被称为伪泛型。</p>
+<h3 id="自动装箱、拆箱与遍历循环"><a href="#自动装箱、拆箱与遍历循环" class="headerlink" title="自动装箱、拆箱与遍历循环"></a>自动装箱、拆箱与遍历循环</h3><p>自动装箱、拆箱在编译之后被转化成了对应的包装和还原方法，而遍历循环则是把代码还原成了迭代器的实现，变长参数在调用的时候变成了一个数组类型的参数。</p>
+<h3 id="条件编译"><a href="#条件编译" class="headerlink" title="条件编译"></a>条件编译</h3><p>Java语言进行条件编译的方法就是使用条件为常量的if语句。如代码</p>
+<h1 id="晚期（运行期）优化"><a href="#晚期（运行期）优化" class="headerlink" title="晚期（运行期）优化"></a>晚期（运行期）优化</h1><p>当虚拟机发现某个方法或代码块运行特别频繁，就会把这些代码认定为“热点代码”（Hot Spot Code），为了提高热点代码的执行效率，在运行时，虚拟机将会把这些代码编译成与本地平台相关的机器码，并进行各种层次的优化，完成这个任务的编译器称 为即时编译器（Just In Time Compiler，JIT）</p>
+<h2 id="编译优化技术"><a href="#编译优化技术" class="headerlink" title="编译优化技术"></a>编译优化技术</h2><h3 id="公共字表达式消除"><a href="#公共字表达式消除" class="headerlink" title="公共字表达式消除"></a>公共字表达式消除</h3><p>如果一个表达式E已经被计算过了，并且从先前的计算到现在E中所有变量的值都没有发生变化，那么E的这次出现就称为了公共子表达式。对于这种表达式，没有必要花时间再对它进行计算，只需要直接用前面计算过的表达式结果代替E就可以了。</p>
+<h3 id="数组边界检查消除"><a href="#数组边界检查消除" class="headerlink" title="数组边界检查消除"></a>数组边界检查消除</h3><p>数组边界检查消除（Array Bounds Checking Elimination）是即时编译器中的一项语言相关的经典优化技术。Java访问数组的时候系统将会自动进行上下界的范围检查，但对于虚拟机的执行子 系统来说，每次数组元素的读写都带有一次隐含的条件判定操作，对于拥有大量数组访问的程序代码，这无疑也是一种性能负担。</p>
+<p>数组边界检查时必须做的，但数组边界检查在某些情况下可以简化。例如数组下标示一个常量，如foo3，只要在编译器根据数据流分析来确定foo.length的值，并判断下标“3”没有越界，执行的时候就无须判断了。再例如数组访问发生在循环之中，并且使用循环变量来进行数组访问，如果编译器只要通过数据流分析就可以判定循环变量的取值范围永远在区间[0, foo.length)之内，那在整个循环中就可以把数组的上下界检查消除掉，这可以节省很多次的条件判断操作。</p>
+<p>与语言相关的其他消除操作还有自动装箱消除（Autobox Elimination）、安全点消除（Safepoint Elimination）、消除反射（Dereflection）等。</p>
+<h3 id="方法内联"><a href="#方法内联" class="headerlink" title="方法内联"></a>方法内联</h3><p>方法内联是编译器最重要的优化手段之一，除了消除方法调用的成本之外，更重要的是可以为其他优化手段建立良好的基础。</p>
+<h3 id="逃逸分析"><a href="#逃逸分析" class="headerlink" title="逃逸分析"></a>逃逸分析</h3><p>逃逸分析（Escape Analysis）并不是直接优化代码的手段，而是为其他优化手段提供依据的分析技术。</p>
+<p>逃逸分析的基本行为就是分析对象动态作用域：当一个对象在方法里面被定义后，它可能被外部方法所引用，例如作为调用参数传递到其他方法中，这种行为称为方法逃逸。甚至还有可能被外部线程访问到，譬如赋值给类变量或可以在其他线程中访问的实例变量，这种行为称为线程逃逸。</p>
+<p>如果能证明一个对象不会逃逸到方法或线程之外，也就是别的方法或线程无法通过任何途径访问到这个对象，则可能为这个变量进行一些高效的优化，如：</p>
+<p>栈上分配（Stack Allocations）：如果确定一个对象不会逃逸出方法之外，那让这个对象在栈上分配内存将会是一个很不错的主意，对象所占用的内存空间就可以随栈帧出栈而销毁。<br>同步消除（Synchronization Elimination）：线程同步本身就是一个相对耗时的过程，如果逃逸分析能够确定一个变量不会逃逸出线程，无法被其他线程访问，那这个变量的读写肯定就不会有竞争，对这个变量实施的同步措施就可以消除掉。<br>标量替换（Scalar Replacement）：标量（Scalar）是指一个数据已经无法再分解成更小的数据来表示了，Java虚拟机中的原始数据类型（int、long等 数值类型及reference类型等）都不能再进一步分解，它们就可以被称为标量。相对的，如果一个数据可以继续分解，那它就被称作聚合量 （Aggregate），Java中的对象就是最典型的聚合量。如果把一个Java对象拆散，根据程序访问的情况，将其使用到的成员变量恢复原始类型来访 问就叫做标量替换。如果逃逸分析证明一个对象不会被外部访问，并且这个对象可以被拆散的话，那程序真正执行的时候将可能不创建这个对象，而改为直接创建它 的若干个被这个方法使用到的成员变量来代替。将对象拆分后，除了可以让对象的成员变量在栈上（栈上存储的数据，很大机会会被虚拟机分配至物理机器的高速寄 存器中存储）分配和读写之外，还可以为后续进一步的优化手段创建条件。</p>
+<h2 id="Java与C-C-的编译器对比"><a href="#Java与C-C-的编译器对比" class="headerlink" title="Java与C/C++的编译器对比"></a>Java与C/C++的编译器对比</h2><p>Java与C/C++的编译器对比实际上代表了最经典的即时编译器与静态编译器的对比，很大程度上也决定了Java与C/C++的性能对比的结果，因为无 论是C/C++还是Java代码，最终编译之后被机器执行的都是本地机器码，哪种语言的性能更高，除了它们自身的API库实现得好坏以外，其余的比较就成 了一场“拼编译器”和“拼输出代码质量”的游戏。</p>
+<p>Java虚拟机的即时编译器与C/C++的静态优化编译器相比，可能会由于下列这些原因导致输出的本地代码有一些劣势：</p>
+<p>因为即时编译器运行占用的是用户程序的运行时间，具有很大的时间压力，它能提供的优化手段也严重受制于编译成本。<br>Java语言是动态的类型安全语言，这就意味着需要由虚拟机来确保程序不会违反语言的语义或访问非结构化内存。在实现层面上看，这就意味着虚拟机必须频繁地进行动态检查，如实例方法访问时检查空指针、数组元素访问时检查上下界范围、类型转换时检查继承关系，等等。<br>Java语言中虽然没有virtual关键字，但是使用虚方法的频率却远远大于C/C++语言，这就意味着运行时对方法接收者进行多态选择的频率要远远大于C/C++语言，这也意味着即时编译器在进行一些优化时的难度要远远大于C/C++的静态优化编译器。<br>Java是可以动态扩展的语言，运行时加载新的类可能改变程序类型的继承关系，这使得很多全局的优化都难以进行，因为编译器无法看见程序的全貌，许多全局的优化措施都只能以激进优化的方式来完成，编译器不得不时刻注意并随着类型的变化而在运行时撤销或重新进行一些优化。<br>Java语言中对象的内存分配都是在堆上进行的，只有方法中的局部变量才能在栈上分配。而C/C++的对象则有多种内存分配方式，既可能在堆上分配，又可 能在栈上分配，如果可以在栈上分配线程私有的对象，将减轻内存回收的压力。另外，C/C++中主要由用户程序代码来回收分配的内存，这就不存在无用对象筛 选的过程，因此运行效率也比垃圾收集机制要高。</p>
+
             </div>
         </div>
     </div>
