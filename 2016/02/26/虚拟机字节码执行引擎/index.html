@@ -10,7 +10,8 @@
     <title>虚拟机字节码执行引擎 | 守夜人</title>
     <meta name="author" content="caisen">
     
-    <meta name="description" content="">
+    <meta name="description" content="运行时栈帧结构栈帧是虚拟机栈的栈元素，栈帧存储了局部变量表，操作数栈，动态连接，返回地址等信息。每一个方法的调用都对应着一个栈帧在虚拟机栈中的入栈和出栈。
+局部变量表由方法参数，方法内定义的局部变量组成，容量以变量槽（Slot）为最小单位。如果该方法不是static方法，则局部变量表的第一个索引为该">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -156,7 +157,23 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/技术/">
-                    技术 <span class="right">9 篇</span></a>
+                    技术 <span class="right">10 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/技术/java/">
+                    java <span class="right">7 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-2" collapse-level="2">
+                <a class="no-padding" href="/categories/技术/java/JVM/">
+                    JVM <span class="right">7 篇</span></a>
                 </a>
             </li>
 
@@ -173,22 +190,6 @@
             <li class="collapse-level-2" collapse-level="2">
                 <a class="no-padding" href="/categories/技术/android/android开发艺术探索/">
                     android开发艺术探索 <span class="right">3 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/技术/java/">
-                    java <span class="right">6 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-2" collapse-level="2">
-                <a class="no-padding" href="/categories/技术/java/JVM/">
-                    JVM <span class="right">6 篇</span></a>
                 </a>
             </li>
 
@@ -245,12 +246,32 @@
 
 
             <div class="toc light-green-link-context hide-on-med-and-down">
-    
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#运行时栈帧结构"><span class="section table-of-contents-text">运行时栈帧结构</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#局部变量表"><span class="section table-of-contents-text">局部变量表</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#操作数栈"><span class="section table-of-contents-text">操作数栈</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#动态连接"><span class="section table-of-contents-text">动态连接</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#方法返回地址"><span class="section table-of-contents-text">方法返回地址</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#方法调用"><span class="section table-of-contents-text">方法调用</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#解析"><span class="section table-of-contents-text">解析</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#静态分派"><span class="section table-of-contents-text">静态分派</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#动态分派"><span class="section table-of-contents-text">动态分派</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#单分派和多分派"><span class="section table-of-contents-text">单分派和多分派</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#基于栈的字节码执行引擎"><span class="section table-of-contents-text">基于栈的字节码执行引擎</span></a></li></ol>
 </div>
 
 
             <div class="entry light-green-link-context">
-                <p><img src="http://static.codeceo.com/images/2015/07/4851a9cfb1fab6fa8c4089137771a41d.png" alt=""></p>
+                <h2 id="运行时栈帧结构"><a href="#运行时栈帧结构" class="headerlink" title="运行时栈帧结构"></a>运行时栈帧结构</h2><p><img src="http://static.codeceo.com/images/2015/07/4851a9cfb1fab6fa8c4089137771a41d.png" alt=""><br>栈帧是虚拟机栈的栈元素，栈帧存储了局部变量表，操作数栈，动态连接，返回地址等信息。每一个方法的调用都对应着一个栈帧在虚拟机栈中的入栈和出栈。</p>
+<h3 id="局部变量表"><a href="#局部变量表" class="headerlink" title="局部变量表"></a>局部变量表</h3><p>由方法参数，方法内定义的局部变量组成，容量以变量槽（Slot）为最小单位。如果该方法不是static方法，则局部变量表的第一个索引为该对象的引用，用this可以取到。</p>
+<h3 id="操作数栈"><a href="#操作数栈" class="headerlink" title="操作数栈"></a>操作数栈</h3><p>最开始为空，由字节码指令往栈中存数据和取数据，方法的返回值也会存到上一个方法的操作数栈中。</p>
+<h3 id="动态连接"><a href="#动态连接" class="headerlink" title="动态连接"></a>动态连接</h3><p>含有一个指向常量池中该栈帧所属方法的引用，持有该引用是为了进行动态分派。</p>
+<h3 id="方法返回地址"><a href="#方法返回地址" class="headerlink" title="方法返回地址"></a>方法返回地址</h3><p>存放的是调用该方法的pc计数器值，当方法正常返回时，就会把返回值传递到上层方法调用者。当方法中发生没有可被捕获的异常，也会返回，但是不会向上层传递返回值。</p>
+<h2 id="方法调用"><a href="#方法调用" class="headerlink" title="方法调用"></a>方法调用</h2><p>java是一门面向对象的语言，它具有多态性。那么虚拟机又是如何知道运行时该调用哪一个方法？</p>
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>所有方法调用中的目标方法在Class文件里面都是一个常量池中的符号引用。<br>在类加载的解析阶段，一部分符号引用会被转化为直接引用，这种解析成立的前提是：方法在程序真正运行之前就有一个可确定的调用版本，且这个方法的调用版本在运行时是不可改变的。符合这个条件的有静态方法和私有方法两大类。</p>
+<p>JVM提供了4条方法调用的字节码指令：</p>
+<p>invokestatic:调用静态方法<br>invokespecial:调用实例构造器<init>方法，私有方法和父类方法<br>invokevirtual:调用所有的虚方法<br>invokeinterface:调用接口方法，会在运行时再确定一个实现此接口的对象。<br>只要能被invokestatic和invokespecial调用的方法，都可以在解析阶段进行转化。<br>除此以外（除静态方法，实例构造器，私有方法，父类方法以外）其他方法称为虚方法。</init></p>
+<p>JAVA非虚方法除了invokestatic和invokespecial以外，还有一种就是final修饰的方法，因为该方法无法被覆盖，这种被final修饰的方法是用invokevirtual指令调用的。</p>
+<h3 id="静态分派"><a href="#静态分派" class="headerlink" title="静态分派"></a>静态分派</h3><p>是在编译期就决定了该调用哪一个方法而不是由虚拟机来确定，方法重载就是典型的静态分派。</p>
+<h3 id="动态分派"><a href="#动态分派" class="headerlink" title="动态分派"></a>动态分派</h3><p>是在虚拟机运行阶段才能决定调用哪一个方法，方法重写就是典型的动态分派。</p>
+<p>动态分派的实现：当调用一个对象的方法时，会将该对象的引用压栈到操作数栈，然后字节码指令invokevirtual会去寻找该引用实际类型。如果在实际类型中找对应的方法，且访问权限足够，则直接返回该方法引用，否则会依照继承关系对父类进行查找。实际上，如果子类没有重写父类方法，则子类方法的引用会直接指向父类方法。</p>
+<h3 id="单分派和多分派"><a href="#单分派和多分派" class="headerlink" title="单分派和多分派"></a>单分派和多分派</h3><p>方法的接收者与方法的参数统称为方法的宗量。</p>
+<p>根据分派基于多少种宗量，可以将分派划分为单分派和多分派两种</p>
+<p>单分派是根据一个宗量对目标方法进行选择，<br>多分派是根据多于一个宗量对目标方法进行选择。</p>
+<p>（同时有重载和重写发生的情况）<br>根据之前方法调用可能生成的4种字节码，找到对应方法可能生成的字节码，再根据字节码解析过程进行判断。</p>
+<p>首先进行静态分派，生成相应的字节码，在常量池中生成对应的方法符号引用，这个过程根据了两个宗量进行选择（接收者和参数），因此静态分派是多分派类型。</p>
+<p>再进行动态分派，将符号引用变成直接引用时，只对方法的接收者进行选择，因此只有一个宗量，动态分派是单分派。</p>
+<h2 id="基于栈的字节码执行引擎"><a href="#基于栈的字节码执行引擎" class="headerlink" title="基于栈的字节码执行引擎"></a>基于栈的字节码执行引擎</h2><p>不管是解释型语言还是编译型语言，机器都无法理解非二进制语言。高级语言转化成机器语言都遵循现代经典编译原理。即执行前对程序源码进行词法和语法分析，构建抽象语法树。C语言等编译型语言会由单独的执行引擎做这些工作，而Java语言等解释型语言语法抽象树由jvm完成。jvm可以选择通过解释器来解释字节码执行还是通过优化器生成机器代码来执行。</p>
+<p>常用的两套指令集架构分别是基于栈的指令集和基于寄存器的指令集。基于栈的指令集会慢一些，但是它与寄存器无关，更容易实现到处运行的目标</p>
 
             </div>
         </div>
