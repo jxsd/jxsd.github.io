@@ -10,6 +10,10 @@
     <title>线程安全与锁优化 | 守夜人</title>
     <meta name="author" content="caisen">
     
+    <meta name="description" content="Java的线程安全1.不可变
+通过java的final关键字来事项。对于基本数据类型，直接用final修饰即可保证不可变性；但是对于对象，需要保证对象的行为不会对其状态产生任何影响。
+2.绝对线程安全没有，Vector是一个线程安全的容器，效率低，应该非常安全，但是在多线程的情况下仍然是不安全的，所">
+    
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -161,22 +165,6 @@
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/技术/java/">
-                    java <span class="right">9 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-2" collapse-level="2">
-                <a class="no-padding" href="/categories/技术/java/JVM/">
-                    JVM <span class="right">9 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
                 <a class="no-padding" href="/categories/技术/android/">
                     android <span class="right">3 篇</span></a>
                 </a>
@@ -187,6 +175,22 @@
             <li class="collapse-level-2" collapse-level="2">
                 <a class="no-padding" href="/categories/技术/android/android开发艺术探索/">
                     android开发艺术探索 <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/技术/java/">
+                    java <span class="right">9 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-2" collapse-level="2">
+                <a class="no-padding" href="/categories/技术/java/JVM/">
+                    JVM <span class="right">9 篇</span></a>
                 </a>
             </li>
 
@@ -243,12 +247,28 @@
 
 
             <div class="toc light-green-link-context hide-on-med-and-down">
-    
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Java的线程安全"><span class="section table-of-contents-text">Java的线程安全</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#线程安全的实现方法"><span class="section table-of-contents-text">线程安全的实现方法</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#互斥同步"><span class="section table-of-contents-text">互斥同步</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#非阻塞同步"><span class="section table-of-contents-text">非阻塞同步</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#无同步方案"><span class="section table-of-contents-text">无同步方案</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#锁优化"><span class="section table-of-contents-text">锁优化</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#自旋锁和自适应自旋"><span class="section table-of-contents-text">自旋锁和自适应自旋</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#锁消除"><span class="section table-of-contents-text">锁消除</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#锁粗化"><span class="section table-of-contents-text">锁粗化</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#轻量级锁"><span class="section table-of-contents-text">轻量级锁</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#偏向锁"><span class="section table-of-contents-text">偏向锁</span></a></li></ol></li></ol>
 </div>
 
 
             <div class="entry light-green-link-context">
-                
+                <h2 id="Java的线程安全"><a href="#Java的线程安全" class="headerlink" title="Java的线程安全"></a>Java的线程安全</h2><p>1.不可变</p>
+<p>通过java的final关键字来事项。对于基本数据类型，直接用final修饰即可保证不可变性；但是对于对象，需要保证对象的行为不会对其状态产生任何影响。</p>
+<p>2.绝对线程安全<br>没有，Vector是一个线程安全的容器，效率低，应该非常安全，但是在多线程的情况下仍然是不安全的，所以没有</p>
+<p>3.相对线程安全<br>对对象单独操作是线程安全的，我们在调用的时候不需要做额外的保障措施。java中经常说的线程安全就是这类。大部分线程安全类就是这种，例如Vector Hashtable</p>
+<p>4.线程兼容<br>对象本身不是线程安全的，但是可以通过调用端正确的使用同步手段来保证对象在并发环境中安全的使用。ArrayList HashMap</p>
+<p>5.线程对立<br>线程对立是指不管调用端是否采用了同步措施，都无法在多线程环境中并发使用的代码。例如suspen与resume，应当避免。</p>
+<h2 id="线程安全的实现方法"><a href="#线程安全的实现方法" class="headerlink" title="线程安全的实现方法"></a>线程安全的实现方法</h2><h3 id="互斥同步"><a href="#互斥同步" class="headerlink" title="互斥同步"></a>互斥同步</h3><p>保证共享数据只可以被一个线程使用。主要实现手段是synchronized<br>对象可以多次加锁，每次加锁都会对锁计数加1，释放时减1，为0时锁就释放了。<br>synchronized同步块对于同一条线程是可以重入的，且同步块在进入的线程执行完成前，会阻塞后面其他线程的进入。</p>
+<p>存在问题：<br>互斥同步最主要的问题就是进行线程阻塞和唤醒所带来的性能问题。也被称为阻塞同步，是一种悲观的并发策略</p>
+<h3 id="非阻塞同步"><a href="#非阻塞同步" class="headerlink" title="非阻塞同步"></a>非阻塞同步</h3><p>还有一种基于冲突检测的乐观并发策略。先进行操作，如果没有其他线程争用共享数据，那么操作就成功；如果共享数据有竞争，那么就进行自旋等待或是别的补救操作。这种乐观的并发策略不要求我们把线程挂起，被称作非阻塞同步。<br>新的concurrent中实现这种非阻塞的同步操作，见其中的CAS操作</p>
+<h3 id="无同步方案"><a href="#无同步方案" class="headerlink" title="无同步方案"></a>无同步方案</h3><p>最安全的就是无共享数据需要操作的代码或是线程本地存储的数据。因为不要共享数据，这些代码天生就是线程安全的，自然无需同步。例如：ThreadLocal技术 可重入代码</p>
+<h2 id="锁优化"><a href="#锁优化" class="headerlink" title="锁优化"></a>锁优化</h2><p>HotSpot在1.6实现很多锁优化技术。</p>
+<h3 id="自旋锁和自适应自旋"><a href="#自旋锁和自适应自旋" class="headerlink" title="自旋锁和自适应自旋"></a>自旋锁和自适应自旋</h3><p>为了让线程等待，我们让线程进入一个忙循环（自旋），这项技术就是所谓的自旋锁。<br>1.6引入了自适应自旋，就是自旋的实践不再固定，而是根据同一个锁上一次自旋时间及锁拥有者的状态来决定。</p>
+<h3 id="锁消除"><a href="#锁消除" class="headerlink" title="锁消除"></a>锁消除</h3><p>虚拟机即时编译器在运行时，对一些代码上要求同步，但是被检测不可能存在共享数据竞争的锁进行消除，判断依据是逃逸分析的数据支持（见程序编译与代码优化）。逃逸分析（Escape Analysis）并不是直接优化代码的手段，而是为其他优化手段提供依据的分析技术</p>
+<h3 id="锁粗化"><a href="#锁粗化" class="headerlink" title="锁粗化"></a>锁粗化</h3><p>我们一般会要求同步块的范围尽可能的小，但是如果在一段代码中对同一个对象频繁加锁，堆性能会造成很大的影响。这里我们会通过锁粗化的技术将同步块的范围扩大。这就是锁粗化。</p>
+<h3 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h3><p>传统的锁由于使用操作系统互斥量来实现，被称为重量级锁。1.6中新增了轻量级锁，在没有多线程竞争的情况下，减少传统锁使用操作系统互斥量产生的性能消耗。<br>轻量级锁并不会真正的加锁，更多的还是标识一下。<br>对象中会有一个Mark Word，用于存储对象自身的运行时数据。如果一个线程要获取这个对象的锁，那么线程会在堆栈中创建一个Lock Record，用于存储该对象的Mark Word，同时对象的Mark Word中的锁定参数也会设置为锁定。接下来虚拟机会通过CAS操作来将对象的Mark Word更新为指向线程的Lock Record。<br>如果CAS操作时，发现Mark Word已经有了指向，那么如果指向的当前线程的栈帧，说明线程已获取该锁，那么直接进入。如果指向不同的线程，说明存在多个线程竞争的情况，那么轻量级锁就不再有效，会直接膨胀为重量级锁。</p>
+<h3 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h3><p>同轻量级锁不一样，偏向锁会保证第一个获得它的线程，如果接下来的执行过程中，该锁没有被其他线程获得，则持有偏向锁的线程将永远不需要再进行同步。<br>每当有另外一个线程获得这个锁时，偏向锁模式就 宣告结束。</p>
+
             </div>
         </div>
     </div>

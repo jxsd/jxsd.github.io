@@ -10,6 +10,9 @@
     <title>java内存模型与线程 | 守夜人</title>
     <meta name="author" content="caisen">
     
+    <meta name="description" content="硬件效率与一致性由于运算速度的差距，CPU和存储设备间加入多层的cache。同时也引入了缓存一致性的问题。解决缓存一致性有多种读写协议，(MSI,MESI,MOSI,Synapse,Firefly和Dragon Protocol等。
+java内存模型(JMM)主内存与工作内存1.所有的变量都存储在主">
+    
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -161,22 +164,6 @@
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/技术/java/">
-                    java <span class="right">9 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-2" collapse-level="2">
-                <a class="no-padding" href="/categories/技术/java/JVM/">
-                    JVM <span class="right">9 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
                 <a class="no-padding" href="/categories/技术/android/">
                     android <span class="right">3 篇</span></a>
                 </a>
@@ -187,6 +174,22 @@
             <li class="collapse-level-2" collapse-level="2">
                 <a class="no-padding" href="/categories/技术/android/android开发艺术探索/">
                     android开发艺术探索 <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/技术/java/">
+                    java <span class="right">9 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-2" collapse-level="2">
+                <a class="no-padding" href="/categories/技术/java/JVM/">
+                    JVM <span class="right">9 篇</span></a>
                 </a>
             </li>
 
@@ -243,12 +246,46 @@
 
 
             <div class="toc light-green-link-context hide-on-med-and-down">
-    
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#硬件效率与一致性"><span class="section table-of-contents-text">硬件效率与一致性</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#java内存模型-JMM"><span class="section table-of-contents-text">java内存模型(JMM)</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#主内存与工作内存"><span class="section table-of-contents-text">主内存与工作内存</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#内存间的交互操作"><span class="section table-of-contents-text">内存间的交互操作</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#volatile变量的特殊规则"><span class="section table-of-contents-text">volatile变量的特殊规则</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#final域"><span class="section table-of-contents-text">final域</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#long和double型变量的特殊规则"><span class="section table-of-contents-text">long和double型变量的特殊规则</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#原子性，可见性和有序性"><span class="section table-of-contents-text">原子性，可见性和有序性</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#happens-before"><span class="section table-of-contents-text">happens-before</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#java与线程"><span class="section table-of-contents-text">java与线程</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#java线程调度"><span class="section table-of-contents-text">java线程调度</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#状态转换"><span class="section table-of-contents-text">状态转换</span></a></li></ol></li></ol>
 </div>
 
 
             <div class="entry light-green-link-context">
-                
+                <h2 id="硬件效率与一致性"><a href="#硬件效率与一致性" class="headerlink" title="硬件效率与一致性"></a>硬件效率与一致性</h2><p>由于运算速度的差距，CPU和存储设备间加入多层的cache。同时也引入了缓存一致性的问题。<br>解决缓存一致性有多种读写协议，(MSI,MESI,MOSI,Synapse,Firefly和Dragon Protocol等。</p>
+<h2 id="java内存模型-JMM"><a href="#java内存模型-JMM" class="headerlink" title="java内存模型(JMM)"></a>java内存模型(JMM)</h2><h3 id="主内存与工作内存"><a href="#主内存与工作内存" class="headerlink" title="主内存与工作内存"></a>主内存与工作内存</h3><p>1.所有的变量都存储在主内存中<br>2.每个线程都还有自己的工作内存，拥有主内存的对象的拷贝<br>3.线程只能操作自己的工作内存，线程间的交互只能通过主内存通讯<br><img src="http://static.oschina.net/uploads/space/2013/0328/212310_82w7_200838.jpg" alt=""><br><img src="http://cdn1.infoqstatic.com/statics_s1_20160414-0116/resource/articles/java-memory-model-1/zh/resources/11.png" alt=""></p>
+<h3 id="内存间的交互操作"><a href="#内存间的交互操作" class="headerlink" title="内存间的交互操作"></a>内存间的交互操作</h3><p>8种操作的作用场景，参考上面的图。</p>
+<p>1、luck（锁定）：作用于主内存的变量，它把一个变量标示为一条线程独占的状态。<br>2、unlock（解锁）：作用于主内存的变量，它把一个处于锁定状态的变量释放出来，释放后的变量才可以被其他线程锁定。<br>3、read（读取）：作用于主内存的变量，它把一个变量的值从主内存传输到工作内存中，以便随后的load动作使用。<br>4、load（载入）：作用于工作内存的变量，它把read操作从主内存中得到的变量值放入工作内存的变量副本中。<br>5、use（使用）：作用于工作内存的变量，它把工作内存中的一个变量的值传递给执行引擎，每当虚拟机遇到一个需要使用到变量的值得字节码指令时将会执行这个操作。<br>6、assign（赋值）：作用于工作内存的变量，它把一个从执行引擎接收到的值赋给工作内存的变量，每当虚拟机遇到一个给变量赋值的字节码指令时执行这个操作。<br>7、store（存储）：作用于工作内存的变量，它把工作内存中的一个变量的值传递到主内存中，以便随后的write操作使用。<br>8、write（写入）：作用于主内存的变量，它把store操作从工作内存中得到的变量值放入主内存的变量中。</p>
+<p>执行上述8种基本操作时必须满足如下规则：</p>
+<p>1.read 和load ，store和write 必须一对操作<br>2.不允许线程丢弃assign操作，变量在工作内存中改变后必须把变法同步回主内存<br>3.没有assign操作，不允许变量从工作内存同步回主内存<br>4.新变量只能在主内存中诞生，不允许在工作内存中直接使用一个未被初始化的变量（load或assign）<br>对一个变量实时use和store之前必须先执行过assign和load操作<br>5.一个变量同一时刻值允许一条线程lock操作，但lock操作可以多次，执行相同数量的unlock，变量才会解锁<br>6.lock操作会清空工作内存副本，执行引擎使用前，需要执行load或者assign操作初始化变量的值<br>7.没有lock操作，就不允许unlock操作。不允许unlock另一个线程变量。<br>8.unlock操作前必须先store，write操作</p>
+<h3 id="volatile变量的特殊规则"><a href="#volatile变量的特殊规则" class="headerlink" title="volatile变量的特殊规则"></a>volatile变量的特殊规则</h3><p>一：保证此变量对所有线程的可见性，每次use之前都必须先read和load。<br>要正确使用<br>1.写入变量不依赖此变量的值，或者只有一个线程修改此变量</p>
+<p>2.变量的状态不需要与其它变量共同参与不变约束</p>
+<p>3.访问变量不需要加锁</p>
+<p>二：禁止指令重排序优化<br>volatile的变量附近的代码不会被指令重排序打乱。<br>具体是在变量操作之前代码不会被打乱到操作之后，操作之后的代码不会打乱到操作之前</p>
+<p>性能：与普通变量上在写操作可能会慢些，因为需要插入内存屏障来保证不乱序执行。<br>不过比sync高效很多</p>
+<p>具体操作细节：<br>A：read，load和use必须一起出现。保证使用变量前必须先从主内存刷新最新的值<br>B：assign，store和write必须一起出现。保证改变变量的时候刷新回去主内存。<br>C：被volatile修饰的变量不会被指令重排序优化，保证代码的执行顺序与程序的顺序相同</p>
+<h3 id="final域"><a href="#final域" class="headerlink" title="final域"></a>final域</h3><p>final类型的域是不能修改的，除了这一点外，在Java内存模型中，final域还有着特殊的语义，final域能确保初始化过程的安全性，从而可以不受限制地访问不可变对象，并在共享这些对象时无须同步。具体而言，就是被final修饰的字段在构造器中一旦被初始化完成，并且构造器没有把“this”的引用传递出去（this引用逃逸是一件很危险的事情，其他线程有可能通过这个引用访问到“初始化了一半”的对象），那么在其他线程中就能看到final字段的值，而且其外、外部可见状态永远也不会改变。它所带来的安全性是最简单最纯粹的。</p>
+<h3 id="long和double型变量的特殊规则"><a href="#long和double型变量的特殊规则" class="headerlink" title="long和double型变量的特殊规则"></a>long和double型变量的特殊规则</h3><p>Java内存模型要求lock、unlock、read、load、assign、use、store和write这8个操作都具有原子性，但是对于64位的数据类型long和double，在模型中特别定义了一条宽松的规定：允许虚拟机将没有被volatile修饰的64位数据的读写操作划分为两次32位的操作来进行。这样，如果有多个线程共享一个未被声明为volatile的long或double类型的变量，并且同时对它们进行读取和修改操作，那么某些线程可能会读到一个既非原值，也非其他线程修改值得代表了“半个变量”的数值。不过这种读取到“半个变量”的情况非常罕见，因为Java内存模型虽然允许虚拟机不把long和double变量的读写实现成原子操作，但允许迅疾选择把这些操作实现为具有原子性的操作，而且还“强烈建议”虚拟机这样实现。目前各种平台下的商用虚拟机几乎都选择吧64位数据的读写操作作为原子操作来对待，因此在编码时，不需要将long和double变量专门声明为volatile。</p>
+<h3 id="原子性，可见性和有序性"><a href="#原子性，可见性和有序性" class="headerlink" title="原子性，可见性和有序性"></a>原子性，可见性和有序性</h3><p>原子性：read load assign use store write变量操作的操作都具有原子性。lock unlock通过synchronized语法来加锁。<br>可见性：volatile，final和synchronized 实现变量的修改值在其它线程可见<br>有序性：本线程内观察所有操作都是有序的。但是由于指令重排序的优化和工作内存和主内存的同步延迟，会导致在其它线程看了不保证有序。</p>
+<h3 id="happens-before"><a href="#happens-before" class="headerlink" title="happens-before"></a>happens-before</h3><p>从JDK5开始，java使用新的JSR -133内存模型。JSR-133提出了happens-before的概念，通过这个概念来阐述操作之间的内存可见性。如果一个操作执行的结果需要对另一个操作可见，那么这两个操作之间必须存在happens-before关系。这里提到的两个操作既可以是在一个线程之内，也可以是在不同线程之间。 与程序员密切相关的happens-before规则如下：<br>程序顺序规则：一个线程中的每个操作，happens- before 于该线程中的任意后续操作。<br>监视器锁规则：对一个监视器锁的解锁，happens- before 于随后对这个监视器锁的加锁。<br>volatile变量规则：对一个volatile域的写，happens- before 于任意后续对这个volatile域的读。<br>传递性：如果A happens- before B，且B happens- before C，那么A happens- before C。<br>注意，两个操作之间具有happens-before关系，并不意味着前一个操作必须要在后一个操作之前执行！happens-before仅仅要求前一个操作（执行的结果）对后一个操作可见，且前一个操作按顺序排在第二个操作之前（the first is visible to and ordered before the second）。happens- before的定义很微妙，后文会具体说明happens-before为什么要这么定义。</p>
+<h2 id="java与线程"><a href="#java与线程" class="headerlink" title="java与线程"></a>java与线程</h2><p><strong>映射方式</strong><br>java在win和linux上都是一对一的线程模型，一条java线程映射到一条轻量级进程</p>
+<h3 id="java线程调度"><a href="#java线程调度" class="headerlink" title="java线程调度"></a>java线程调度</h3><p><strong>调度方法</strong><br><img src="http://www.2cto.com/uploadfile/Collfiles/20141115/20141115082938384.png" alt=""><br>协同式调度：进程自己放弃CPU时间</p>
+<p>协同式调度指某一线程执行完后主动通知系统切换到另一线程上执行，这种模式就像接力赛一样，一个人跑完自己的路程就把接力棒交接给下一个人，下个人继续往下跑。线程的执行时间由线程本身控制，线程切换可以预知，不存在多线程同步问题，但它有一个致命弱点：如果一个线程编写有问题，运行到一半就一直堵塞，那么可能导致整个系统崩溃。</p>
+<p>抢占式调度：系统分配时间片给进程</p>
+<p>抢占式调度指的是每条线程执行的时间、线程的切换都由系统控制，系统控制指的是在系统某种运行机制下，可能每条线程都分同样的执行时间片，也可能是某些线程执行的时间片较长，甚至某些线程得不到执行的时间片。在这种机制下，一个线程的堵塞不会导致整个进程堵塞。</p>
+<p>JAVA是后者<br>1.7中可能有协程（Coroutines）<br>JVM规范中规定每个线程都有优先级，且优先级越高越优先执行，但优先级高并不代表能独自占用执行时间片，可能是优先级高得到越多的执行时间片，反之，优先级低的分到的执行时间少但不会分配不到执行时间。<br>Java中线程会按优先级分配CPU时间片运行，那么线程什么时候放弃CPU的使用权？可以归类成三种情况：</p>
+<p>当前运行线程主动放弃CPU，JVM暂时放弃CPU操作（基于时间片轮转调度的JVM操作系统不会让线程永久放弃CPU，或者说放弃本次时间片的执行权），例如调用yield()方法。</p>
+<p>当前运行线程因为某些原因进入阻塞状态，例如阻塞在I/O上。</p>
+<p>当前运行线程结束，即运行完run()方法里面的任务。</p>
+<h3 id="状态转换"><a href="#状态转换" class="headerlink" title="状态转换"></a>状态转换</h3><p><img src="http://www.2cto.com/uploadfile/Collfiles/20150415/20150415084858251.png" alt=""><br>线程间的状态转换： </p>
+<p>1.新建(new)：新创建了一个线程对象。</p>
+<p>2.可运行(runnable)：线程对象创建后，其他线程(比如main线程）调用了该对象的start()方法。该状态的线程位于可运行线程池中，等待被线程调度选中，获取cpu 的使用权 。</p>
+<p>3.运行(running)：可运行状态(runnable)的线程获得了cpu 时间片（timeslice） ，执行程序代码。</p>
+<p>4.阻塞(block)：阻塞状态是指线程因为某种原因放弃了cpu 使用权，也即让出了cpu timeslice，暂时停止运行。直到线程进入可运行(runnable)状态，才有机会再次获得cpu timeslice 转到运行(running)状态。阻塞的情况分三种： </p>
+<p>(一).等待阻塞：运行(running)的线程执行o.wait()方法，JVM会把该线程放入等待队列(waitting queue)中。</p>
+<p>(二).同步阻塞：运行(running)的线程在获取对象的同步锁时，若该同步锁被别的线程占用，则JVM会把该线程放入锁池(lock pool)中。</p>
+<p>(三).其他阻塞：运行(running)的线程执行Thread.sleep(long ms)或t.join()方法，或者发出了I/O请求时，JVM会把该线程置为阻塞状态。当sleep()状态超时、join()等待线程终止或者超时、或者I/O处理完毕时，线程重新转入可运行(runnable)状态。</p>
+<p>5.死亡(dead)：线程run()、main() 方法执行结束，或者因异常退出了run()方法，则该线程结束生命周期。死亡的线程不可再次复生。</p>
+
             </div>
         </div>
     </div>
