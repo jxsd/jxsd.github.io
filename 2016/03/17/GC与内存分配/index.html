@@ -163,22 +163,6 @@
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/技术/android/">
-                    android <span class="right">3 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-2" collapse-level="2">
-                <a class="no-padding" href="/categories/技术/android/android开发艺术探索/">
-                    android开发艺术探索 <span class="right">3 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
                 <a class="no-padding" href="/categories/技术/java/">
                     java <span class="right">9 篇</span></a>
                 </a>
@@ -189,6 +173,22 @@
             <li class="collapse-level-2" collapse-level="2">
                 <a class="no-padding" href="/categories/技术/java/JVM/">
                     JVM <span class="right">9 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/技术/android/">
+                    android <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-2" collapse-level="2">
+                <a class="no-padding" href="/categories/技术/android/android开发艺术探索/">
+                    android开发艺术探索 <span class="right">3 篇</span></a>
                 </a>
             </li>
 
@@ -220,6 +220,7 @@
 </nav>
 
 <article>
+
     <div class="card">
         <div class="card-content">
             
@@ -232,24 +233,24 @@
 
 
             </div>
-            <time class="light-green-link-context" datetime="2016-03-17T01:22:26.000Z"><a href="/2016/03/17/GC与内存分配/">2016-03-17</a></time>
+            <time class="light-blue-link-context" datetime="2016-03-17T01:22:26.000Z"><a href="/2016/03/17/GC与内存分配/">2016-03-17</a></time>
 
             
     <div class="tags-row">
         
-            <a href="/tags/笔记/" class="chip light-green">笔记</a>
+            <a href="/tags/笔记/" class="chip light-blue">笔记</a>
         
-            <a href="/tags/jvm/" class="chip light-green">jvm</a>
+            <a href="/tags/jvm/" class="chip light-blue">jvm</a>
         
     </div>
 
 
-            <div class="toc light-green-link-context hide-on-med-and-down">
+            <div class="toc light-blue-link-context hide-on-med-and-down">
     <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#对象的生存与死亡"><span class="section table-of-contents-text">对象的生存与死亡</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#引用计数算法"><span class="section table-of-contents-text">引用计数算法</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#可达性分析算法"><span class="section table-of-contents-text">可达性分析算法</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#回收方法区"><span class="section table-of-contents-text">回收方法区</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#垃圾回收算法"><span class="section table-of-contents-text">垃圾回收算法</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#标记-清除算法-老年代使用"><span class="section table-of-contents-text">标记-清除算法(老年代使用)</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#复制算法-一般在新生代中使用"><span class="section table-of-contents-text">复制算法(一般在新生代中使用)</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#标记-整理算法-老年代使用"><span class="section table-of-contents-text">标记-整理算法(老年代使用)</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#分代收集算法"><span class="section table-of-contents-text">分代收集算法</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#垃圾收集器"><span class="section table-of-contents-text">垃圾收集器</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#内存分配与回收策略"><span class="section table-of-contents-text">内存分配与回收策略</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#对象优先在新生代Eden上分配"><span class="section table-of-contents-text">对象优先在新生代Eden上分配</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#空间分配担保"><span class="section table-of-contents-text">空间分配担保</span></a></li></ol></li></ol>
 </div>
 
 
-            <div class="entry light-green-link-context">
+            <div class="entry light-blue-link-context">
                 <h2 id="对象的生存与死亡"><a href="#对象的生存与死亡" class="headerlink" title="对象的生存与死亡"></a>对象的生存与死亡</h2><h3 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h3><p>引用计数是垃圾收集器中的早期策略。现在主流虚拟机已经很少用了，在这种方法中，堆中每个对象实例都有一个引用计数。当一个对象被创建时，且将该对象实例分配给一个变量，该变量计数设置为1。当任何其它变量被赋值为这个对象的引用时，计数加1（a = b,则b引用的对象实例的计数器+1），但当一个对象实例的某个引用超过了生命周期或者被设置为一个新值时，对象实例的引用计数器减1。任何引用计数器为0的对象实例可以被当作垃圾收集。当一个对象实例被垃圾收集时，它引用的任何对象实例的引用计数器减1。</p>
 <p>优点：引用计数收集器可以很快的执行，交织在程序运行中。对程序需要不被长时间打断的实时环境比较有利。</p>
 <p>缺点：无法检测出循环引用。如父对象有一个对子对象的引用，子对象反过来引用父对象。这样，他们的引用计数永远不可能为0.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        MyObject object1 = <span class="keyword">new</span> MyObject();</span><br><span class="line">        MyObject object2 = <span class="keyword">new</span> MyObject();</span><br><span class="line">        </span><br><span class="line">        object1.object = object2;</span><br><span class="line">        object2.object = object1;</span><br><span class="line">        </span><br><span class="line">        object1 = <span class="keyword">null</span>;</span><br><span class="line">        object2 = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -302,6 +303,8 @@
             </div>
         </div>
     </div>
+
+	
 </article>
 
 
@@ -312,7 +315,7 @@
 </div>
 
         <div class="fixed-action-btn float-sitemap">
-    <a class="btn-floating btn-large light-green">
+    <a class="btn-floating btn-large light-blue">
       <i class="fa fa-caret-square-o-up"></i>
     </a>
     <ul>
@@ -325,7 +328,7 @@
     <footer class="page-footer brown darken-1 darken-1">
     
 
-    <div class="footer-copyright light-green-link-context">
+    <div class="footer-copyright light-blue-link-context">
         <div class="container">
             <p>haha</p>
             
@@ -407,11 +410,11 @@
         $('li.tab a').hover(function() {
             $(this).toggleClass('text-lighten-4');
         });
-        $('.indicator').addClass('light-green lighten-2');
+        $('.indicator').addClass('light-blue lighten-2');
 
         
         // 添加new标签
-        $('.menu-reading,.menu-about').append('<span class="new badge light-green"></span>');
+        $('.menu-reading,.menu-about').append('<span class="new badge light-blue"></span>');
         
     });
 })(jQuery);

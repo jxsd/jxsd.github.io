@@ -165,22 +165,6 @@
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/技术/android/">
-                    android <span class="right">3 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-2" collapse-level="2">
-                <a class="no-padding" href="/categories/技术/android/android开发艺术探索/">
-                    android开发艺术探索 <span class="right">3 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
                 <a class="no-padding" href="/categories/技术/java/">
                     java <span class="right">9 篇</span></a>
                 </a>
@@ -191,6 +175,22 @@
             <li class="collapse-level-2" collapse-level="2">
                 <a class="no-padding" href="/categories/技术/java/JVM/">
                     JVM <span class="right">9 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/技术/android/">
+                    android <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-2" collapse-level="2">
+                <a class="no-padding" href="/categories/技术/android/android开发艺术探索/">
+                    android开发艺术探索 <span class="right">3 篇</span></a>
                 </a>
             </li>
 
@@ -222,6 +222,7 @@
 </nav>
 
 <article>
+
     <div class="card">
         <div class="card-content">
             
@@ -234,24 +235,24 @@
 
 
             </div>
-            <time class="light-green-link-context" datetime="2016-01-20T06:21:48.000Z"><a href="/2016/01/20/线程安全与锁优化/">2016-01-20</a></time>
+            <time class="light-blue-link-context" datetime="2016-01-20T06:21:48.000Z"><a href="/2016/01/20/线程安全与锁优化/">2016-01-20</a></time>
 
             
     <div class="tags-row">
         
-            <a href="/tags/笔记/" class="chip light-green">笔记</a>
+            <a href="/tags/笔记/" class="chip light-blue">笔记</a>
         
-            <a href="/tags/jvm/" class="chip light-green">jvm</a>
+            <a href="/tags/jvm/" class="chip light-blue">jvm</a>
         
     </div>
 
 
-            <div class="toc light-green-link-context hide-on-med-and-down">
+            <div class="toc light-blue-link-context hide-on-med-and-down">
     <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Java的线程安全"><span class="section table-of-contents-text">Java的线程安全</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#线程安全的实现方法"><span class="section table-of-contents-text">线程安全的实现方法</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#互斥同步"><span class="section table-of-contents-text">互斥同步</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#非阻塞同步"><span class="section table-of-contents-text">非阻塞同步</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#无同步方案"><span class="section table-of-contents-text">无同步方案</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#锁优化"><span class="section table-of-contents-text">锁优化</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#自旋锁和自适应自旋"><span class="section table-of-contents-text">自旋锁和自适应自旋</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#锁消除"><span class="section table-of-contents-text">锁消除</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#锁粗化"><span class="section table-of-contents-text">锁粗化</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#轻量级锁"><span class="section table-of-contents-text">轻量级锁</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#偏向锁"><span class="section table-of-contents-text">偏向锁</span></a></li></ol></li></ol>
 </div>
 
 
-            <div class="entry light-green-link-context">
+            <div class="entry light-blue-link-context">
                 <h2 id="Java的线程安全"><a href="#Java的线程安全" class="headerlink" title="Java的线程安全"></a>Java的线程安全</h2><p>1.不可变</p>
 <p>通过java的final关键字来事项。对于基本数据类型，直接用final修饰即可保证不可变性；但是对于对象，需要保证对象的行为不会对其状态产生任何影响。</p>
 <p>2.绝对线程安全<br>没有，Vector是一个线程安全的容器，效率低，应该非常安全，但是在多线程的情况下仍然是不安全的，所以没有</p>
@@ -272,6 +273,8 @@
             </div>
         </div>
     </div>
+
+	
 </article>
 
 
@@ -282,7 +285,7 @@
 </div>
 
         <div class="fixed-action-btn float-sitemap">
-    <a class="btn-floating btn-large light-green">
+    <a class="btn-floating btn-large light-blue">
       <i class="fa fa-caret-square-o-up"></i>
     </a>
     <ul>
@@ -295,7 +298,7 @@
     <footer class="page-footer brown darken-1 darken-1">
     
 
-    <div class="footer-copyright light-green-link-context">
+    <div class="footer-copyright light-blue-link-context">
         <div class="container">
             <p>haha</p>
             
@@ -377,11 +380,11 @@
         $('li.tab a').hover(function() {
             $(this).toggleClass('text-lighten-4');
         });
-        $('.indicator').addClass('light-green lighten-2');
+        $('.indicator').addClass('light-blue lighten-2');
 
         
         // 添加new标签
-        $('.menu-reading,.menu-about').append('<span class="new badge light-green"></span>');
+        $('.menu-reading,.menu-about').append('<span class="new badge light-blue"></span>');
         
     });
 })(jQuery);

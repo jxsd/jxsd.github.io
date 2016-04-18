@@ -164,22 +164,6 @@
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/技术/android/">
-                    android <span class="right">3 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-2" collapse-level="2">
-                <a class="no-padding" href="/categories/技术/android/android开发艺术探索/">
-                    android开发艺术探索 <span class="right">3 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
                 <a class="no-padding" href="/categories/技术/java/">
                     java <span class="right">9 篇</span></a>
                 </a>
@@ -190,6 +174,22 @@
             <li class="collapse-level-2" collapse-level="2">
                 <a class="no-padding" href="/categories/技术/java/JVM/">
                     JVM <span class="right">9 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/技术/android/">
+                    android <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-2" collapse-level="2">
+                <a class="no-padding" href="/categories/技术/android/android开发艺术探索/">
+                    android开发艺术探索 <span class="right">3 篇</span></a>
                 </a>
             </li>
 
@@ -221,6 +221,7 @@
 </nav>
 
 <article>
+
     <div class="card">
         <div class="card-content">
             
@@ -233,24 +234,24 @@
 
 
             </div>
-            <time class="light-green-link-context" datetime="2016-02-22T03:03:15.000Z"><a href="/2016/02/22/虚拟机类加载机制/">2016-02-22</a></time>
+            <time class="light-blue-link-context" datetime="2016-02-22T03:03:15.000Z"><a href="/2016/02/22/虚拟机类加载机制/">2016-02-22</a></time>
 
             
     <div class="tags-row">
         
-            <a href="/tags/笔记/" class="chip light-green">笔记</a>
+            <a href="/tags/笔记/" class="chip light-blue">笔记</a>
         
-            <a href="/tags/jvm/" class="chip light-green">jvm</a>
+            <a href="/tags/jvm/" class="chip light-blue">jvm</a>
         
     </div>
 
 
-            <div class="toc light-green-link-context hide-on-med-and-down">
+            <div class="toc light-blue-link-context hide-on-med-and-down">
     <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#类加载的过程"><span class="section table-of-contents-text">类加载的过程</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#加载"><span class="section table-of-contents-text">加载</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#验证"><span class="section table-of-contents-text">验证</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#准备"><span class="section table-of-contents-text">准备</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#解析"><span class="section table-of-contents-text">解析</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#初始化"><span class="section table-of-contents-text">初始化</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#类加载器"><span class="section table-of-contents-text">类加载器</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#类与类加载器"><span class="section table-of-contents-text">类与类加载器</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#双亲委派模型"><span class="section table-of-contents-text">双亲委派模型</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#自定义类加载器"><span class="section table-of-contents-text">自定义类加载器</span></a></li></ol></li></ol>
 </div>
 
 
-            <div class="entry light-green-link-context">
+            <div class="entry light-blue-link-context">
                 <p>生命周期<br><img src="http://img.blog.csdn.net/20150905224439218" alt=""></p>
 <h2 id="类加载的过程"><a href="#类加载的过程" class="headerlink" title="类加载的过程"></a>类加载的过程</h2><p>加载(装载)、验证、准备、初始化和卸载这五个阶段顺序是固定的，类的加载过程必须按照这种顺序开始，而解析阶段不一定；它在某些情况下可以在初始化之后再开始，这是为了运行时动态绑定特性（JIT例如接口只在调用的时候才知道具体实现的是哪个子类）。值得注意的是：这些阶段通常都是互相交叉的混合式进行的，通常会在一个阶段执行的过程中调用或激活另外一个阶段。</p>
 <h3 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h3><p>这个阶段通常也被称作“装载”，主要完成：</p>
@@ -301,6 +302,8 @@
             </div>
         </div>
     </div>
+
+	
 </article>
 
 
@@ -311,7 +314,7 @@
 </div>
 
         <div class="fixed-action-btn float-sitemap">
-    <a class="btn-floating btn-large light-green">
+    <a class="btn-floating btn-large light-blue">
       <i class="fa fa-caret-square-o-up"></i>
     </a>
     <ul>
@@ -324,7 +327,7 @@
     <footer class="page-footer brown darken-1 darken-1">
     
 
-    <div class="footer-copyright light-green-link-context">
+    <div class="footer-copyright light-blue-link-context">
         <div class="container">
             <p>haha</p>
             
@@ -406,11 +409,11 @@
         $('li.tab a').hover(function() {
             $(this).toggleClass('text-lighten-4');
         });
-        $('.indicator').addClass('light-green lighten-2');
+        $('.indicator').addClass('light-blue lighten-2');
 
         
         // 添加new标签
-        $('.menu-reading,.menu-about').append('<span class="new badge light-green"></span>');
+        $('.menu-reading,.menu-about').append('<span class="new badge light-blue"></span>');
         
     });
 })(jQuery);

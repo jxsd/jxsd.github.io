@@ -164,22 +164,6 @@ java内存模型(JMM)主内存与工作内存1.所有的变量都存储在主">
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/技术/android/">
-                    android <span class="right">3 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-2" collapse-level="2">
-                <a class="no-padding" href="/categories/技术/android/android开发艺术探索/">
-                    android开发艺术探索 <span class="right">3 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
                 <a class="no-padding" href="/categories/技术/java/">
                     java <span class="right">9 篇</span></a>
                 </a>
@@ -190,6 +174,22 @@ java内存模型(JMM)主内存与工作内存1.所有的变量都存储在主">
             <li class="collapse-level-2" collapse-level="2">
                 <a class="no-padding" href="/categories/技术/java/JVM/">
                     JVM <span class="right">9 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/技术/android/">
+                    android <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-2" collapse-level="2">
+                <a class="no-padding" href="/categories/技术/android/android开发艺术探索/">
+                    android开发艺术探索 <span class="right">3 篇</span></a>
                 </a>
             </li>
 
@@ -221,6 +221,7 @@ java内存模型(JMM)主内存与工作内存1.所有的变量都存储在主">
 </nav>
 
 <article>
+
     <div class="card">
         <div class="card-content">
             
@@ -233,24 +234,24 @@ java内存模型(JMM)主内存与工作内存1.所有的变量都存储在主">
 
 
             </div>
-            <time class="light-green-link-context" datetime="2016-01-16T06:18:58.000Z"><a href="/2016/01/16/java内存模型与线程/">2016-01-16</a></time>
+            <time class="light-blue-link-context" datetime="2016-01-16T06:18:58.000Z"><a href="/2016/01/16/java内存模型与线程/">2016-01-16</a></time>
 
             
     <div class="tags-row">
         
-            <a href="/tags/笔记/" class="chip light-green">笔记</a>
+            <a href="/tags/笔记/" class="chip light-blue">笔记</a>
         
-            <a href="/tags/jvm/" class="chip light-green">jvm</a>
+            <a href="/tags/jvm/" class="chip light-blue">jvm</a>
         
     </div>
 
 
-            <div class="toc light-green-link-context hide-on-med-and-down">
+            <div class="toc light-blue-link-context hide-on-med-and-down">
     <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#硬件效率与一致性"><span class="section table-of-contents-text">硬件效率与一致性</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#java内存模型-JMM"><span class="section table-of-contents-text">java内存模型(JMM)</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#主内存与工作内存"><span class="section table-of-contents-text">主内存与工作内存</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#内存间的交互操作"><span class="section table-of-contents-text">内存间的交互操作</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#volatile变量的特殊规则"><span class="section table-of-contents-text">volatile变量的特殊规则</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#final域"><span class="section table-of-contents-text">final域</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#long和double型变量的特殊规则"><span class="section table-of-contents-text">long和double型变量的特殊规则</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#原子性，可见性和有序性"><span class="section table-of-contents-text">原子性，可见性和有序性</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#happens-before"><span class="section table-of-contents-text">happens-before</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#java与线程"><span class="section table-of-contents-text">java与线程</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#java线程调度"><span class="section table-of-contents-text">java线程调度</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#状态转换"><span class="section table-of-contents-text">状态转换</span></a></li></ol></li></ol>
 </div>
 
 
-            <div class="entry light-green-link-context">
+            <div class="entry light-blue-link-context">
                 <h2 id="硬件效率与一致性"><a href="#硬件效率与一致性" class="headerlink" title="硬件效率与一致性"></a>硬件效率与一致性</h2><p>由于运算速度的差距，CPU和存储设备间加入多层的cache。同时也引入了缓存一致性的问题。<br>解决缓存一致性有多种读写协议，(MSI,MESI,MOSI,Synapse,Firefly和Dragon Protocol等。</p>
 <h2 id="java内存模型-JMM"><a href="#java内存模型-JMM" class="headerlink" title="java内存模型(JMM)"></a>java内存模型(JMM)</h2><h3 id="主内存与工作内存"><a href="#主内存与工作内存" class="headerlink" title="主内存与工作内存"></a>主内存与工作内存</h3><p>1.所有的变量都存储在主内存中<br>2.每个线程都还有自己的工作内存，拥有主内存的对象的拷贝<br>3.线程只能操作自己的工作内存，线程间的交互只能通过主内存通讯<br><img src="http://static.oschina.net/uploads/space/2013/0328/212310_82w7_200838.jpg" alt=""><br><img src="http://cdn1.infoqstatic.com/statics_s1_20160414-0116/resource/articles/java-memory-model-1/zh/resources/11.png" alt=""></p>
 <h3 id="内存间的交互操作"><a href="#内存间的交互操作" class="headerlink" title="内存间的交互操作"></a>内存间的交互操作</h3><p>8种操作的作用场景，参考上面的图。</p>
@@ -289,6 +290,8 @@ java内存模型(JMM)主内存与工作内存1.所有的变量都存储在主">
             </div>
         </div>
     </div>
+
+	
 </article>
 
 
@@ -299,7 +302,7 @@ java内存模型(JMM)主内存与工作内存1.所有的变量都存储在主">
 </div>
 
         <div class="fixed-action-btn float-sitemap">
-    <a class="btn-floating btn-large light-green">
+    <a class="btn-floating btn-large light-blue">
       <i class="fa fa-caret-square-o-up"></i>
     </a>
     <ul>
@@ -312,7 +315,7 @@ java内存模型(JMM)主内存与工作内存1.所有的变量都存储在主">
     <footer class="page-footer brown darken-1 darken-1">
     
 
-    <div class="footer-copyright light-green-link-context">
+    <div class="footer-copyright light-blue-link-context">
         <div class="container">
             <p>haha</p>
             
@@ -394,11 +397,11 @@ java内存模型(JMM)主内存与工作内存1.所有的变量都存储在主">
         $('li.tab a').hover(function() {
             $(this).toggleClass('text-lighten-4');
         });
-        $('.indicator').addClass('light-green lighten-2');
+        $('.indicator').addClass('light-blue lighten-2');
 
         
         // 添加new标签
-        $('.menu-reading,.menu-about').append('<span class="new badge light-green"></span>');
+        $('.menu-reading,.menu-about').append('<span class="new badge light-blue"></span>');
         
     });
 })(jQuery);

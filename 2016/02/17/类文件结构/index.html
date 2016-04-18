@@ -164,22 +164,6 @@
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/技术/android/">
-                    android <span class="right">3 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-2" collapse-level="2">
-                <a class="no-padding" href="/categories/技术/android/android开发艺术探索/">
-                    android开发艺术探索 <span class="right">3 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
                 <a class="no-padding" href="/categories/技术/java/">
                     java <span class="right">9 篇</span></a>
                 </a>
@@ -190,6 +174,22 @@
             <li class="collapse-level-2" collapse-level="2">
                 <a class="no-padding" href="/categories/技术/java/JVM/">
                     JVM <span class="right">9 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/技术/android/">
+                    android <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-2" collapse-level="2">
+                <a class="no-padding" href="/categories/技术/android/android开发艺术探索/">
+                    android开发艺术探索 <span class="right">3 篇</span></a>
                 </a>
             </li>
 
@@ -221,6 +221,7 @@
 </nav>
 
 <article>
+
     <div class="card">
         <div class="card-content">
             
@@ -233,24 +234,24 @@
 
 
             </div>
-            <time class="light-green-link-context" datetime="2016-02-17T08:40:10.000Z"><a href="/2016/02/17/类文件结构/">2016-02-17</a></time>
+            <time class="light-blue-link-context" datetime="2016-02-17T08:40:10.000Z"><a href="/2016/02/17/类文件结构/">2016-02-17</a></time>
 
             
     <div class="tags-row">
         
-            <a href="/tags/笔记/" class="chip light-green">笔记</a>
+            <a href="/tags/笔记/" class="chip light-blue">笔记</a>
         
-            <a href="/tags/jvm/" class="chip light-green">jvm</a>
+            <a href="/tags/jvm/" class="chip light-blue">jvm</a>
         
     </div>
 
 
-            <div class="toc light-green-link-context hide-on-med-and-down">
+            <div class="toc light-blue-link-context hide-on-med-and-down">
     <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#类文件的结构"><span class="section table-of-contents-text">类文件的结构</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#魔数"><span class="section table-of-contents-text">魔数</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#版本号"><span class="section table-of-contents-text">版本号</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#常量池"><span class="section table-of-contents-text">常量池</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#访问标志"><span class="section table-of-contents-text">访问标志</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#类索引"><span class="section table-of-contents-text">类索引</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#父类索引"><span class="section table-of-contents-text">父类索引</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#interfaces-count和interfaces"><span class="section table-of-contents-text">interfaces_count和interfaces</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#fields-count和fields"><span class="section table-of-contents-text">fields_count和fields</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#method-count和methods"><span class="section table-of-contents-text">.method_count和methods</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#attributes-count和attributes"><span class="section table-of-contents-text">attributes_count和attributes</span></a></li></ol></li></ol>
 </div>
 
 
-            <div class="entry light-green-link-context">
+            <div class="entry light-blue-link-context">
                 <h2 id="类文件的结构"><a href="#类文件的结构" class="headerlink" title="类文件的结构"></a>类文件的结构</h2><p><img src="http://files.jb51.net/file_images/article/201304/2013040110195731.png" alt=""><br>u1、u2、u4、u8来分别代表1个字节、2个字节、4个字节、8个字节的无符号数</p>
 <h3 id="魔数"><a href="#魔数" class="headerlink" title="魔数"></a>魔数</h3><p>每个Class文件的头4个字节称为魔数（Magic Number），它的唯一作用是用于确定这个文件是否为一个能被虚拟机接受的Class文件。很多文件存储标准中都使用魔数来进行身份识别，譬如图片格式，如gif或jpeg等在文件头中都存有魔数。Class文件魔数的值为0xCAFEBABE。如果一个文件不是以0xCAFEBABE开头，那它就肯定不是Java class文件。</p>
 <h3 id="版本号"><a href="#版本号" class="headerlink" title="版本号"></a>版本号</h3><p>紧接着魔数的4个字节存储的是Class文件的版本号：第5和第6是次版本号（Minior Version），第7个和第8个字节是主版本号(Major Version)。Java的版本号是人45开始的，JDK1.1之后的每个JDK大版本发布主版本号向上加1，高版本的JDK能向下兼容以前版本的Class文件，但不能运行以后版本的Class文件，即使文件格式并未发生变化。JDK1.1能支持版本号为45.0~45.65535的Class文件，JDK1.2则能支持45.0~46.65535的Class文件。JDK1.7可生成的Class文件主版本号的最大值为51.0。 </p>
@@ -272,6 +273,8 @@
             </div>
         </div>
     </div>
+
+	
 </article>
 
 
@@ -282,7 +285,7 @@
 </div>
 
         <div class="fixed-action-btn float-sitemap">
-    <a class="btn-floating btn-large light-green">
+    <a class="btn-floating btn-large light-blue">
       <i class="fa fa-caret-square-o-up"></i>
     </a>
     <ul>
@@ -295,7 +298,7 @@
     <footer class="page-footer brown darken-1 darken-1">
     
 
-    <div class="footer-copyright light-green-link-context">
+    <div class="footer-copyright light-blue-link-context">
         <div class="container">
             <p>haha</p>
             
@@ -377,11 +380,11 @@
         $('li.tab a').hover(function() {
             $(this).toggleClass('text-lighten-4');
         });
-        $('.indicator').addClass('light-green lighten-2');
+        $('.indicator').addClass('light-blue lighten-2');
 
         
         // 添加new标签
-        $('.menu-reading,.menu-about').append('<span class="new badge light-green"></span>');
+        $('.menu-reading,.menu-about').append('<span class="new badge light-blue"></span>');
         
     });
 })(jQuery);
