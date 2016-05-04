@@ -309,7 +309,9 @@
 <h3 id="2-4-4使用AIDL"><a href="#2-4-4使用AIDL" class="headerlink" title="2.4.4使用AIDL"></a>2.4.4使用AIDL</h3><p><a href="http://blog.csdn.net/lmj623565791/article/details/38461079" target="_blank" rel="external">参考</a><br>Messager是串行的方式处理客户端的请求，如果有大量并发，Messnger就不适合，AIDL是Messenger的底层实现</p>
 <h4 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h4><p>服务端首先创建一个Service用来监听客户端的请求，然后创建一个AIDL文件，将暴露给客户端的接口在AIDL文件中声明，最后在Service中实现这个AIDL接口</p>
 <h4 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h4><p>绑定服务端的Service，绑定成功后，将服务器端的Binder对象转成AIDL接口所属类型，接着就可以调用AIDL的方法。<br>AIDL支持的数据类型（int long char boolean double,String Charsequence List Map Parcelable AIDL）</p>
-<h3 id="2-4-5使用ContentProvider"><a href="#2-4-5使用ContentProvider" class="headerlink" title="2.4.5使用ContentProvider"></a>2.4.5使用ContentProvider</h3><h3 id="2-4-6使用Socket"><a href="#2-4-6使用Socket" class="headerlink" title="2.4.6使用Socket"></a>2.4.6使用Socket</h3><h2 id="2-5-Binder连接池"><a href="#2-5-Binder连接池" class="headerlink" title="2.5 Binder连接池"></a>2.5 Binder连接池</h2><h2 id="2-6-选用合适的IPC方式"><a href="#2-6-选用合适的IPC方式" class="headerlink" title="2.6 选用合适的IPC方式"></a>2.6 选用合适的IPC方式</h2>
+<h3 id="2-4-5使用ContentProvider"><a href="#2-4-5使用ContentProvider" class="headerlink" title="2.4.5使用ContentProvider"></a>2.4.5使用ContentProvider</h3><h3 id="2-4-6使用Socket"><a href="#2-4-6使用Socket" class="headerlink" title="2.4.6使用Socket"></a>2.4.6使用Socket</h3><p><a href="http://blog.csdn.net/itachi85/article/details/50667740" target="_blank" rel="external"></a></p>
+<h2 id="2-5-Binder连接池"><a href="#2-5-Binder连接池" class="headerlink" title="2.5 Binder连接池"></a>2.5 Binder连接池</h2><h2 id="2-6-选用合适的IPC方式"><a href="#2-6-选用合适的IPC方式" class="headerlink" title="2.6 选用合适的IPC方式"></a>2.6 选用合适的IPC方式</h2><p><img src="http://img.blog.csdn.net/20160212181149250" alt=""></p>
+
             </div>
         </div>
     </div>
