@@ -7,13 +7,16 @@
 
     
 
-    <title>android | 守夜人</title>
+    <title>android—_launchMode | 守夜人</title>
     <meta name="author" content="caisen">
+    
+    <meta name="description" content="在activity的配置文件中指定：android：launchMode=”xxx”有standard，singleTop。singleTask,singleStance.默认是standard,缺点是可能重复创建多个相同的活动，a-a a-a a-a
+singleTop：可以判断栈顶的活动是不是返">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="android—_launchMode"/>
     <meta property="og:site_name" content="caisen"/>
 
     
@@ -273,60 +276,67 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper brown darken-1">
         <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/技术/">技术</a><a class="breadcrumb" href="/categories/技术/android/">android</a><a class="breadcrumb" href="/categories/技术/android/基础知识点/">基础知识点</a>
+
 
         
-            <a class="breadcrumb" href="/categories/技术/android/">android</a>
+
         
     </div>
 </nav>
 
+<article>
+
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>android—_launchMode</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="light-blue-link-context" datetime="2016-05-20T23:49:42.000Z"><a href="/2016/05/21/android—-launchMode/">2016-05-21</a></time>
+
+            
+    <div class="tags-row">
         
-            <a href="/2016/05/21/android—-launchMode/" class="collection-item black-text text-darken-1">
-                <time datetime="2016-05-20T23:49:42.000Z">2016-05-21</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                android—_launchMode
-            </a>
-        
-            <a href="/2016/05/07/android—动画/" class="collection-item black-text text-darken-1">
-                <time datetime="2016-05-06T21:29:54.000Z">2016-05-07</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                android—动画
-            </a>
-        
-            <a href="/2016/05/06/view的工作原理/" class="collection-item black-text text-darken-1">
-                <time datetime="2016-05-06T00:13:46.000Z">2016-05-06</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                view的工作原理
-            </a>
-        
-            <a href="/2016/04/14/android的消息机制/" class="collection-item black-text text-darken-1">
-                <time datetime="2016-04-14T08:59:27.000Z">2016-04-14</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                android的消息机制
-            </a>
-        
-            <a href="/2016/04/10/view的事件体系/" class="collection-item black-text text-darken-1">
-                <time datetime="2016-04-10T03:00:02.000Z">2016-04-10</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                view的事件体系
-            </a>
-        
-            <a href="/2016/04/07/IPC机制/" class="collection-item black-text text-darken-1">
-                <time datetime="2016-04-06T23:10:44.000Z">2016-04-07</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                IPC机制
-            </a>
+            <a href="/tags/android基础/" class="chip light-blue">android基础</a>
         
     </div>
+
+
+            <div class="toc light-blue-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry light-blue-link-context">
+                <p>在activity的配置文件中指定：android：launchMode=”xxx”<br>有standard，singleTop。singleTask,singleStance.<br>默认是standard,缺点是可能重复创建多个相同的活动，a-a a-a a-a</p>
+<p>singleTop：可以判断栈顶的活动是不是返回栈的活动，如果不是才会创建新的实例，但是一个活动还是会重复创建不同的实例，例如a-b b-a a-b，</p>
+<p>singleTask：启动活动的时候会在返回栈中寻找有没有该活动的实例，有的话就把其上面的活动全部出栈，这样就在栈顶，而且保证了一个活动只有一个实例。</p>
+<p>singleInstance:在一个application中上面三中都视情况而定，但如果多个application，每个application都有自己的返回栈，当一个活动是可以被多个application访问的时候，这个活动必然会在多个返回栈中产生多个实例，而singleInstance会有一个单独的返回栈来管理这个活动。</p>
+
+            </div>
+        </div>
+    </div>
+
+	
+</article>
+
+
+
+
 
 
 </div>
