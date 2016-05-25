@@ -7,16 +7,20 @@
 
     
 
-    <title>view的工作原理 | 守夜人</title>
+    <title>学会分析问题 | 守夜人</title>
     <meta name="author" content="caisen">
     
-    <meta name="description" content="view的绘制measure过程view的meansuremeasure是一个final方法，不需要重写
-viewgroup的meansureviewgroup是一个抽象类，所以没有重写view的onmeasure，但提供了measurechildren方法，出来完成自身的measure方法并且会遍">
+    <meta name="description" content="套路看到一篇博客，博主写了一个分析解决问题的套路：WHAT WHEN HOW WHY。
+WHAT:出现了什么问题？
+WHEN:在什么情况下会出现？
+HOW:把问题具体化，在when的情况下出现了什么问题？
+WHY:为什么会导致这个问题？
+自身反省以前写代码的时候追求快，上手就写，也很少去考虑用例，模">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="view的工作原理"/>
+    <meta property="og:title" content="学会分析问题"/>
     <meta property="og:site_name" content="caisen"/>
 
     
@@ -291,7 +295,7 @@ viewgroup的meansureviewgroup是一个抽象类，所以没有重写view的onmea
             
     
     
-    <a class="breadcrumb" href="/categories/技术/">技术</a><a class="breadcrumb" href="/categories/技术/android/">android</a><a class="breadcrumb" href="/categories/技术/android/android开发艺术探索/">android开发艺术探索</a>
+    <a class="breadcrumb" href="/categories/念/">念</a><a class="breadcrumb" href="/categories/念/ToDo/">ToDo</a>
 
 
         
@@ -309,43 +313,34 @@ viewgroup的meansureviewgroup是一个抽象类，所以没有重写view的onmea
             <div class="article-title">
                 
     
-        <h1>view的工作原理</h1>
+        <h1>学会分析问题</h1>
     
 
 
             </div>
-            <time class="light-blue-link-context" datetime="2016-05-06T00:13:46.000Z"><a href="/2016/05/06/view的工作原理/">2016-05-06</a></time>
+            <time class="light-blue-link-context" datetime="2016-05-25T06:47:26.000Z"><a href="/2016/05/25/学会分析问题/">2016-05-25</a></time>
 
             
     <div class="tags-row">
         
-            <a href="/tags/笔记/" class="chip light-blue">笔记</a>
-        
-            <a href="/tags/android/" class="chip light-blue">android</a>
+            <a href="/tags/思考/" class="chip light-blue">思考</a>
         
     </div>
 
 
             <div class="toc light-blue-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#view的绘制"><span class="section table-of-contents-text">view的绘制</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#measure过程"><span class="section table-of-contents-text">measure过程</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#view的meansure"><span class="section table-of-contents-text">view的meansure</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#viewgroup的meansure"><span class="section table-of-contents-text">viewgroup的meansure</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#layout"><span class="section table-of-contents-text">layout</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#draw"><span class="section table-of-contents-text">draw</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#自定义view"><span class="section table-of-contents-text">自定义view</span></a></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#套路"><span class="section table-of-contents-text">套路</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#自身反省"><span class="section table-of-contents-text">自身反省</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#学会分析问题比写代码更重要"><span class="section table-of-contents-text">学会分析问题比写代码更重要</span></a></li></ol>
 </div>
 
 
             <div class="entry light-blue-link-context">
-                <h2 id="view的绘制"><a href="#view的绘制" class="headerlink" title="view的绘制"></a>view的绘制</h2><h3 id="measure过程"><a href="#measure过程" class="headerlink" title="measure过程"></a>measure过程</h3><h4 id="view的meansure"><a href="#view的meansure" class="headerlink" title="view的meansure"></a>view的meansure</h4><p>measure是一个final方法，不需要重写</p>
-<h4 id="viewgroup的meansure"><a href="#viewgroup的meansure" class="headerlink" title="viewgroup的meansure"></a>viewgroup的meansure</h4><p>viewgroup是一个抽象类，所以没有重写view的onmeasure，但提供了measurechildren方法，出来完成自身的measure方法并且会遍历所有子元素的measure方法需要重写measure并且会遍历所有子元素的measure方法</p>
-<h3 id="layout"><a href="#layout" class="headerlink" title="layout"></a>layout</h3><p>layout方法会设置该View视图位于父视图的坐标轴，即mLeft，mTop，mLeft，mBottom(调用setFrame()函数去实现)接下来回调onLayout()方法(如果该View是ViewGroup对象，需要实现该方法，对每个子视图进行布局) ；<br>如果该View是个ViewGroup类型，需要遍历每个子视图chiildView，调用该子视图的layout()方法去设置它的坐标值。</p>
-<h3 id="draw"><a href="#draw" class="headerlink" title="draw"></a>draw</h3><p>1.绘制背景background。draw（canvas）<br>2.绘制自己ondraw<br>3.绘制children（dispatchDraw）<br>4.绘制装饰（onDrawScrollBars）</p>
-<h2 id="自定义view"><a href="#自定义view" class="headerlink" title="自定义view"></a>自定义view</h2><p>4类：<br>1.继承view重写ondraw</p>
-<p>2.继承viewgroup派生的layout</p>
-<p>3.继承特定的view（textview）</p>
-<p>4.继承特定的viewgroup（Linearlayout）</p>
-<p>注意事项:</p>
-<p>1.让view支持wrap_content<br>直接继承view或viewgroup的控件时，如果不再onmeasure方法中对wrap_content做特殊处理（设置自身大小），那么在外界布局使用wrap_content时无法达到预期效果（wrap_content变成了match_parent）</p>
-<p>2.让view支持padding<br>直接继承view，如果不再draw方法中处理padding，padding无法起作用，直接继承viewgroup的控件需要在onmeasure和onlayout中考虑和子元素margin对其造成的影响</p>
-<p>3.不要在view中使用handler<br>view内部提供post方法</p>
-<p>4.view中有线程或者动画，需要及时停止<br>内存泄漏</p>
-<p>5.view带有滑动嵌套时，需要处理好滑动冲突</p>
+                <h3 id="套路"><a href="#套路" class="headerlink" title="套路"></a>套路</h3><p>看到一篇博客，博主写了一个分析解决问题的套路：WHAT WHEN HOW WHY。</p>
+<p>WHAT:出现了什么问题？</p>
+<p>WHEN:在什么情况下会出现？</p>
+<p>HOW:把问题具体化，在when的情况下出现了什么问题？</p>
+<p>WHY:为什么会导致这个问题？</p>
+<h3 id="自身反省"><a href="#自身反省" class="headerlink" title="自身反省"></a>自身反省</h3><p>以前写代码的时候追求快，上手就写，也很少去考虑用例，模块化，解耦这些。导致出现问题，各种搜索，往往问题出现在对某个知识点掌握不牢固或者不规范的地方。<br>费心费力搞了几天，信心不仅被打击，而且更慢了。如果当初设计的时候按照套路尽可能的想的更清楚，出现问题会更少。</p>
+<h3 id="学会分析问题比写代码更重要"><a href="#学会分析问题比写代码更重要" class="headerlink" title="学会分析问题比写代码更重要"></a>学会分析问题比写代码更重要</h3><p>事物自有其规律，提高抽象的能力能更准确的找到事物的本质。</p>
 
             </div>
         </div>
