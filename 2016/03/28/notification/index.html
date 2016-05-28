@@ -7,13 +7,16 @@
 
     
 
-    <title>吐槽 | 守夜人</title>
+    <title>notification | 守夜人</title>
     <meta name="author" content="caisen">
+    
+    <meta name="description" content="第一步创建一个通知管理类，1NotificationManager m=(NotificationManager) getSystemService(context.NOTIFICATION_SERVICE);
+第二步创建通知对象1Notification n=new Notification(R.">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="notification"/>
     <meta property="og:site_name" content="caisen"/>
 
     
@@ -281,30 +284,70 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper brown darken-1">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/技术/">技术</a><a class="breadcrumb" href="/categories/技术/android/">android</a><a class="breadcrumb" href="/categories/技术/android/基础知识点/">基础知识点</a>
+
 
         
-            <a class="breadcrumb" href="/tags/吐槽/">吐槽</a>
+
         
     </div>
 </nav>
 
+<article>
+
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>notification</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="light-blue-link-context" datetime="2016-03-28T05:17:54.000Z"><a href="/2016/03/28/notification/">2016-03-28</a></time>
+
+            
+    <div class="tags-row">
         
-            <a href="/2016/04/26/你的app是不是出问题了/" class="collection-item black-text text-darken-1">
-                <time datetime="2016-04-25T19:57:17.000Z">2016-04-26</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                你的app是不是出问题了
-            </a>
+            <a href="/tags/android基础/" class="chip light-blue">android基础</a>
         
     </div>
+
+
+            <div class="toc light-blue-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#第一步"><span class="section table-of-contents-text">第一步</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#第二步"><span class="section table-of-contents-text">第二步</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#第三步"><span class="section table-of-contents-text">第三步</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#第四步"><span class="section table-of-contents-text">第四步</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#第五步"><span class="section table-of-contents-text">第五步</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#点击"><span class="section table-of-contents-text">点击</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#加特效"><span class="section table-of-contents-text">加特效</span></a></li></ol>
+</div>
+
+
+            <div class="entry light-blue-link-context">
+                <h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><p>创建一个通知管理类，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NotificationManager m=(NotificationManager) getSystemService(context.NOTIFICATION_SERVICE);</span><br></pre></td></tr></table></figure></p>
+<h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h3><p>创建通知对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Notification n=<span class="keyword">new</span> Notification(R.drawer.icon,<span class="string">"this is text"</span>,Sysyem.currentTimeMillis());</span><br></pre></td></tr></table></figure></p>
+<h3 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h3><p>给通知对象设定信息<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">n.setLatestEventInfo(<span class="keyword">this</span>,<span class="string">"the is content title"</span>,<span class="string">"this is content text"</span>,<span class="keyword">null</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="第四步"><a href="#第四步" class="headerlink" title="第四步"></a>第四步</h3><p>传入通知对象<br>m.notify(1,n);//1是指定id的通知，id是不同的，</p>
+<h3 id="第五步"><a href="#第五步" class="headerlink" title="第五步"></a>第五步</h3><p>点击之后通知栏的通知要取消<br>在点击之后进入的activity的onCreate()中先实例化<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NotificationManager m=(NotificationManager) getSystemService(context.NOTIFICATION_SERVICE);</span><br><span class="line">再m.cancel(<span class="number">1</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="点击"><a href="#点击" class="headerlink" title="点击"></a>点击</h3><p>通知大多时候可以点击，这时应该使用PendingIntent;<br>在第二步和第三步之间加入<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">intent=<span class="keyword">new</span> Intent(<span class="keyword">this</span>,xxx.class);</span><br><span class="line">PendingIntent pi = PendingIntent.getActivity(<span class="keyword">this</span>,<span class="number">0</span>,intent,PendingIntent.FLAG_CANCEL_CURRENT);</span><br></pre></td></tr></table></figure><br>最后第三步最后一个参数为pi.</p>
+<h3 id="加特效"><a href="#加特效" class="headerlink" title="加特效"></a>加特效</h3><p>通知到来的时候铃声，振动，LED灯。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Uri uri=Uri.fromfile(<span class="keyword">new</span> file(<span class="string">"音频文件路径"</span>));</span><br><span class="line">n.sound=uri;</span><br><span class="line"><span class="keyword">long</span>[]vibrates=&#123;<span class="number">0</span>,<span class="number">1000</span>,<span class="number">1000</span>,<span class="number">1000</span>&#125;;</span><br><span class="line">n.vibrates=vibrates;</span><br></pre></td></tr></table></figure></p>
+
+            </div>
+        </div>
+    </div>
+
+	
+</article>
+
+
+
+
 
 
 </div>

@@ -7,13 +7,17 @@
 
     
 
-    <title>吐槽 | 守夜人</title>
+    <title>android数据存储与持久化 | 守夜人</title>
     <meta name="author" content="caisen">
+    
+    <meta name="description" content="文件存储io流，允许其它application进行读写，4.2版本废弃，
+SharedPreferences存储键值对的形式存储
+将数据写入到SharedPreferences三种方式得到SharedPreferences：context类的getSharedPreferences（废弃），acti">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="android数据存储与持久化"/>
     <meta property="og:site_name" content="caisen"/>
 
     
@@ -281,30 +285,71 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper brown darken-1">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/技术/">技术</a><a class="breadcrumb" href="/categories/技术/android/">android</a><a class="breadcrumb" href="/categories/技术/android/基础知识点/">基础知识点</a>
+
 
         
-            <a class="breadcrumb" href="/tags/吐槽/">吐槽</a>
+
         
     </div>
 </nav>
 
+<article>
+
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>android数据存储与持久化</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="light-blue-link-context" datetime="2016-03-28T05:11:45.000Z"><a href="/2016/03/28/android数据存储与持久化/">2016-03-28</a></time>
+
+            
+    <div class="tags-row">
         
-            <a href="/2016/04/26/你的app是不是出问题了/" class="collection-item black-text text-darken-1">
-                <time datetime="2016-04-25T19:57:17.000Z">2016-04-26</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                你的app是不是出问题了
-            </a>
+            <a href="/tags/android基础/" class="chip light-blue">android基础</a>
         
     </div>
+
+
+            <div class="toc light-blue-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#文件存储"><span class="section table-of-contents-text">文件存储</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#SharedPreferences存储"><span class="section table-of-contents-text">SharedPreferences存储</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#将数据写入到SharedPreferences"><span class="section table-of-contents-text">将数据写入到SharedPreferences</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#从SharedPreferences读取数据"><span class="section table-of-contents-text">从SharedPreferences读取数据</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#SQLite"><span class="section table-of-contents-text">SQLite</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#创建数据库"><span class="section table-of-contents-text">创建数据库</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#升级数据库"><span class="section table-of-contents-text">升级数据库</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#CRUD数据"><span class="section table-of-contents-text">CRUD数据</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#用SQL的习惯使用数据库"><span class="section table-of-contents-text">用SQL的习惯使用数据库</span></a></li></ol>
+</div>
+
+
+            <div class="entry light-blue-link-context">
+                <h3 id="文件存储"><a href="#文件存储" class="headerlink" title="文件存储"></a>文件存储</h3><p>io流，允许其它application进行读写，4.2版本废弃，</p>
+<h3 id="SharedPreferences存储"><a href="#SharedPreferences存储" class="headerlink" title="SharedPreferences存储"></a>SharedPreferences存储</h3><p>键值对的形式存储</p>
+<h4 id="将数据写入到SharedPreferences"><a href="#将数据写入到SharedPreferences" class="headerlink" title="将数据写入到SharedPreferences"></a>将数据写入到SharedPreferences</h4><p>三种方式得到SharedPreferences：context类的getSharedPreferences（废弃），activity类的SharedPreferences，PreferencesManager类的getdefaultSharedPreferences；<br>例如：在一个button的点击事件中：SharedPreferences.Editor editor=getSharedPreferences(“文件名”，MODE_PRIVATE).edit();<br>editor.putstring(“name”,”tom”);<br>editor.putint(“age”,20);<br>editor.commit();<br>SharedPreferences是使用xml格式对数据进行管理的。</p>
+<h4 id="从SharedPreferences读取数据"><a href="#从SharedPreferences读取数据" class="headerlink" title="从SharedPreferences读取数据"></a>从SharedPreferences读取数据</h4><p>读取数据和写入数据一样，put对应get，<br>例如：在一个button的点击事件中：SharedPreferences p=getSharedPreferences(“文件名”，MODE_PRIVATE);<br>String name=p.setstring(“name”,””);<br>int age =p.setint(“age”,0);<br>可以实现记住密码的功能</p>
+<h3 id="SQLite"><a href="#SQLite" class="headerlink" title="SQLite"></a>SQLite</h3><h4 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h4><p>1.创建一个类继承SQLiteOpenHelper,重写其中的俩个抽象方法onCreate()和onUpgrade();还要重写构造方法。<br>2.在onCreate()中执行建表语句<br>db.execSQL(String a=””+””+””;);</p>
+<h4 id="升级数据库"><a href="#升级数据库" class="headerlink" title="升级数据库"></a>升级数据库</h4><p>onUpgrade()；添加删除表操作。SQLiteOpenHelper第四个参数是版本号，只要依次比之前数字大，if判断用户在用什么版本的数据库，不同版本的用户数据都能得到保存。</p>
+<h4 id="CRUD数据"><a href="#CRUD数据" class="headerlink" title="CRUD数据"></a>CRUD数据</h4><p>SQliteDatabase db=dbhelper.getWritableDatabase();<br>ContentValues v=new ContentValues();<br>v.put(“字段”，”内容”);<br>db.insert(“表名”，null,v);//插入<br>db.update(“表名”，v,”name=?”,new String[]{“xixi”});//第四个参数是第三个参数占位符相应的内容。<br>删除操作和更新操作一样。<br>查询用游标去一个个读取。</p>
+<h3 id="用SQL的习惯使用数据库"><a href="#用SQL的习惯使用数据库" class="headerlink" title="用SQL的习惯使用数据库"></a>用SQL的习惯使用数据库</h3><p>db.execSQL(“insert into book(name,orice)values(?,?)”,new String[]{“haha”,”19”});<br>db.execSQL(“update book set price=?where name=?”,new String[]{“19”,”haha”});<br>db.execSQL(“delete from book where prices&gt;?”,new String[]{“19”});<br>db.rawQuery(“select * from book”,null);</p>
+
+            </div>
+        </div>
+    </div>
+
+	
+</article>
+
+
+
+
 
 
 </div>

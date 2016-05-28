@@ -7,13 +7,17 @@
 
     
 
-    <title>吐槽 | 守夜人</title>
+    <title>broadcast | 守夜人</title>
     <meta name="author" content="caisen">
+    
+    <meta name="description" content="广播分为有序广播和标准广播有序广播：播-接（处理逻辑）-播-接（处理逻辑）-播，可以被截断
+三个知识点：接收广播，发送自定义广播，使用本地广播
+1.接收广播动态注册（在代码中注册）在activity中新建一个class名字为R继承broadcastReceiver覆写onReceiver()方法，在">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="broadcast"/>
     <meta property="og:site_name" content="caisen"/>
 
     
@@ -281,30 +285,70 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper brown darken-1">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/技术/">技术</a><a class="breadcrumb" href="/categories/技术/android/">android</a><a class="breadcrumb" href="/categories/技术/android/基础知识点/">基础知识点</a>
+
 
         
-            <a class="breadcrumb" href="/tags/吐槽/">吐槽</a>
+
         
     </div>
 </nav>
 
+<article>
+
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>broadcast</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="light-blue-link-context" datetime="2016-03-28T05:05:58.000Z"><a href="/2016/03/28/broadcast/">2016-03-28</a></time>
+
+            
+    <div class="tags-row">
         
-            <a href="/2016/04/26/你的app是不是出问题了/" class="collection-item black-text text-darken-1">
-                <time datetime="2016-04-25T19:57:17.000Z">2016-04-26</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                你的app是不是出问题了
-            </a>
+            <a href="/tags/android基础/" class="chip light-blue">android基础</a>
         
     </div>
+
+
+            <div class="toc light-blue-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1-接收广播"><span class="section table-of-contents-text">1.接收广播</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#动态注册（在代码中注册）"><span class="section table-of-contents-text">动态注册（在代码中注册）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#静态注册（manifest-xml）"><span class="section table-of-contents-text">静态注册（manifest.xml）</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-发送自定义广播"><span class="section table-of-contents-text">2.发送自定义广播</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#3-使用本地广播-LocalBroadcastManager"><span class="section table-of-contents-text">3.使用本地广播(LocalBroadcastManager)</span></a></li></ol>
+</div>
+
+
+            <div class="entry light-blue-link-context">
+                <p>广播分为有序广播和标准广播<br>有序广播：播-接（处理逻辑）-播-接（处理逻辑）-播，可以被截断</p>
+<p>三个知识点：接收广播，发送自定义广播，使用本地广播</p>
+<h3 id="1-接收广播"><a href="#1-接收广播" class="headerlink" title="1.接收广播"></a>1.接收广播</h3><h4 id="动态注册（在代码中注册）"><a href="#动态注册（在代码中注册）" class="headerlink" title="动态注册（在代码中注册）"></a>动态注册（在代码中注册）</h4><p>在activity中新建一个class名字为R继承broadcastReceiver覆写onReceiver()方法，在onCreate()添加intentfilter实例，然后通过addaction()添加一个action，再然后实例接收器，注册相应的接收器和动作，最后在ondestroy()取消注册。要在manifest中添加相应的权限。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">onCreate()&#123;</span><br><span class="line">intentfilter = <span class="keyword">new</span> IntentFilter（）；</span><br><span class="line">intentfilter,addaction(android.xxx.xxxxx);</span><br><span class="line">r = <span class="keyword">new</span> R();</span><br><span class="line">registerReceiver(r,intentfilter);</span><br><span class="line">&#125;</span><br><span class="line">ondetroy()&#123;</span><br><span class="line">unregisterReceiver(r);<span class="comment">//一定要取消注册</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="静态注册（manifest-xml）"><a href="#静态注册（manifest-xml）" class="headerlink" title="静态注册（manifest.xml）"></a>静态注册（manifest.xml）</h4><p>比如开机启动，在动态注册中application没有开启就不能监听，<br>静态注册可以添加动作action.BOOT——COMPLETED<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;receiver android:name=".Receiver"&gt;</span><br><span class="line">&lt;intetn-filter&gt;</span><br><span class="line">&lt;action android:name="xxxxx"/&gt;</span><br><span class="line">&lt;/intetn-filter&gt;</span><br><span class="line">&lt;/receiver&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-发送自定义广播"><a href="#2-发送自定义广播" class="headerlink" title="2.发送自定义广播"></a>2.发送自定义广播</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;receiver android:name=".Receiver"&gt;</span><br><span class="line">&lt;intetn-filter&gt;</span><br><span class="line">&lt;action android:name="com.xx.xx.myBroadCast"/&gt;</span><br><span class="line">&lt;/intetn-filter&gt;</span><br><span class="line">&lt;/receiver&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">onCreate()&#123;</span><br><span class="line"><span class="comment">//设置一个button的点击事件</span></span><br><span class="line">intent =<span class="keyword">new</span> Intent(<span class="string">"com.xx.xx.myBroadCast"</span>);</span><br><span class="line">sendBroadcast(intent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-使用本地广播-LocalBroadcastManager"><a href="#3-使用本地广播-LocalBroadcastManager" class="headerlink" title="3.使用本地广播(LocalBroadcastManager)"></a>3.使用本地广播(LocalBroadcastManager)</h3><p>其它的application发送大量的垃圾广播，自己的广播被其它application截获等。这时我们使用本地广播,发送自己的广播以及接收自己的广播<br>LocalBroadcastManager lb=new LocalBroadcastManager.getInstance(this);<br>LocalReceiver lc=new LocalReceiver ;<br>lb.sendBroadcast(intent);<br>广播还可以实现强制下线，当一个帐号被俩个客户端登录，先登录的强制下线。</p>
+
+            </div>
+        </div>
+    </div>
+
+	
+</article>
+
+
+
+
 
 
 </div>

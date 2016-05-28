@@ -7,13 +7,16 @@
 
     
 
-    <title>吐槽 | 守夜人</title>
+    <title>ContentProvider | 守夜人</title>
     <meta name="author" content="caisen">
+    
+    <meta name="description" content="不同于文件，sharedpreferences那样进行全局读写，ContentProvider可以选择对哪个部分的数据进行共享。
+访问其它application的数据借助contentresolve类进行CRUD操作，不像SQLite按表名参数，而是使用Uri建立表示，分权限（authority）和">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="ContentProvider"/>
     <meta property="og:site_name" content="caisen"/>
 
     
@@ -281,30 +284,67 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper brown darken-1">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/技术/">技术</a><a class="breadcrumb" href="/categories/技术/android/">android</a><a class="breadcrumb" href="/categories/技术/android/基础知识点/">基础知识点</a>
+
 
         
-            <a class="breadcrumb" href="/tags/吐槽/">吐槽</a>
+
         
     </div>
 </nav>
 
+<article>
+
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>ContentProvider</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="light-blue-link-context" datetime="2016-03-28T05:16:37.000Z"><a href="/2016/03/28/ContentProvider/">2016-03-28</a></time>
+
+            
+    <div class="tags-row">
         
-            <a href="/2016/04/26/你的app是不是出问题了/" class="collection-item black-text text-darken-1">
-                <time datetime="2016-04-25T19:57:17.000Z">2016-04-26</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                你的app是不是出问题了
-            </a>
+            <a href="/tags/android基础/" class="chip light-blue">android基础</a>
         
     </div>
+
+
+            <div class="toc light-blue-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#访问其它application的数据"><span class="section table-of-contents-text">访问其它application的数据</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#创建自己的内容提供器"><span class="section table-of-contents-text">创建自己的内容提供器</span></a></li></ol>
+</div>
+
+
+            <div class="entry light-blue-link-context">
+                <p>不同于文件，sharedpreferences那样进行全局读写，ContentProvider可以选择对哪个部分的数据进行共享。</p>
+<h3 id="访问其它application的数据"><a href="#访问其它application的数据" class="headerlink" title="访问其它application的数据"></a>访问其它application的数据</h3><p>借助contentresolve类进行CRUD操作，不像SQLite按表名参数，而是使用Uri建立表示，分权限（authority）和路径（path）俩部分<br>Uri uri=Uri.parse(“content://com.xx.xx.provider/table”);<br>代码：Cursor c=getContentReselover().query(//五个参数<br>uri,//某张表或者系统自带的，歌曲，联系人等<br>projection，//指定查询的列名<br>selection，//指定where的约束条件<br>selectionArgs,//为where的占位符提供具体的值<br>orderby//指定查询结果的排序方式<br>)</p>
+<p>if(c!=null){<br>while(c.moveNext()){<br>string s=c.getstring（c.getcolumIndex(column1)）；<br>}<br>c.close();<br>}</p>
+<h3 id="创建自己的内容提供器"><a href="#创建自己的内容提供器" class="headerlink" title="创建自己的内容提供器"></a>创建自己的内容提供器</h3><p>新建一个类继承contentprovider类并重写其中的六个抽象方法<br>oncreate(),query(),insert(),update(),delete(),getType().</p>
+
+            </div>
+        </div>
+    </div>
+
+	
+</article>
+
+
+
+
 
 
 </div>

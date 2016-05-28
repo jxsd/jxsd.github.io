@@ -7,13 +7,15 @@
 
     
 
-    <title>吐槽 | 守夜人</title>
+    <title>service | 守夜人</title>
     <meta name="author" content="caisen">
+    
+    <meta name="description" content="异步消息处理流程1.在主线程中创建一个handler对象，并重写handlerMessage（）方法。2.当子线程中需要进行ui操作时，就创建一个message对象，并通过handler将这条消息传递出去。3.之后这条消息会添加到messagequeue的队列中等待被处理。4.looper则会一直尝">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="service"/>
     <meta property="og:site_name" content="caisen"/>
 
     
@@ -281,30 +283,75 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper brown darken-1">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/技术/">技术</a><a class="breadcrumb" href="/categories/技术/android/">android</a><a class="breadcrumb" href="/categories/技术/android/基础知识点/">基础知识点</a>
+
 
         
-            <a class="breadcrumb" href="/tags/吐槽/">吐槽</a>
+
         
     </div>
 </nav>
 
+<article>
+
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>service</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="light-blue-link-context" datetime="2016-03-28T05:17:10.000Z"><a href="/2016/03/28/service/">2016-03-28</a></time>
+
+            
+    <div class="tags-row">
         
-            <a href="/2016/04/26/你的app是不是出问题了/" class="collection-item black-text text-darken-1">
-                <time datetime="2016-04-25T19:57:17.000Z">2016-04-26</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                你的app是不是出问题了
-            </a>
+            <a href="/tags/android基础/" class="chip light-blue">android基础</a>
         
     </div>
+
+
+            <div class="toc light-blue-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#异步消息处理流程"><span class="section table-of-contents-text">异步消息处理流程</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#service"><span class="section table-of-contents-text">service</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#活动和服务进行通信（onbind-）"><span class="section table-of-contents-text">活动和服务进行通信（onbind()）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#生命周期"><span class="section table-of-contents-text">生命周期</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#前台服务"><span class="section table-of-contents-text">前台服务</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#IntentService"><span class="section table-of-contents-text">IntentService</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry light-blue-link-context">
+                <h3 id="异步消息处理流程"><a href="#异步消息处理流程" class="headerlink" title="异步消息处理流程"></a>异步消息处理流程</h3><p>1.在主线程中创建一个handler对象，并重写handlerMessage（）方法。<br>2.当子线程中需要进行ui操作时，就创建一个message对象，并通过handler将这条消息传递出去。<br>3.之后这条消息会添加到messagequeue的队列中等待被处理。<br>4.looper则会一直尝试从messagequeue中取出待处理消息，最后分发回handler的handlermessage（）方法中。<br>5.由于handler是在主线程中创建的，所以handlermessage（）方法也会在主线程中进行。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Handler handler =<span class="keyword">new</span> handler(）｛</span><br><span class="line">          <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handlermessage</span><span class="params">(Message msg)</span></span>&#123;</span><br><span class="line">              <span class="keyword">switch</span>(msg.what)&#123;</span><br><span class="line">               <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                        text.settext(<span class="string">"hello"</span>);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                        <span class="keyword">default</span>：</span><br><span class="line">                         <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">｝;</span><br></pre></td></tr></table></figure></p>
+<p>在一个button的Onclick()点击事件中：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Thread(<span class="keyword">new</span> runable()&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">Message message=<span class="keyword">new</span> Message():</span><br><span class="line">message.what=<span class="string">"1"</span>;</span><br><span class="line">handler.sendMessage(message);</span><br><span class="line">&#125;</span><br><span class="line">&#125;).start();</span><br></pre></td></tr></table></figure></p>
+<h3 id="service"><a href="#service" class="headerlink" title="service"></a>service</h3><p>继承service，覆写唯一的抽象方法onBind();当然还要覆写onCreate() onstartCommand() ondestroy();作为四大组件，当然要注册。<br>启动和停在服务;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> intent（<span class="keyword">this</span>，myservice.class）；</span><br><span class="line">startService(intent);</span><br><span class="line"><span class="keyword">new</span> intent（<span class="keyword">this</span>，myservice.class）；</span><br><span class="line">stopService(intent);</span><br></pre></td></tr></table></figure></p>
+<h4 id="活动和服务进行通信（onbind-）"><a href="#活动和服务进行通信（onbind-）" class="headerlink" title="活动和服务进行通信（onbind()）"></a>活动和服务进行通信（onbind()）</h4><p>1.在service中，写一个类继承Binder,写一些自己的方法，实例化自己的binder，然后在onbind()方法中return mybinder;</p>
+<p>2.在activity中，创建一个ServiceConnection的匿名类,在里面重写了onserviceConnected()和onserviceDisConnected();这俩个方法用于服务与活动成功绑定和解除绑定的时候调用。</p>
+<p>3.在onserviceConnected()中，写onbind()中的return的mybinder取出来，执行逻辑。<br>mybinder=(myservice.mybinder)service;<br>mybinder.xxx();</p>
+<p>4.在一个button的点击事件中<br>new intent（this，myservice.class）；</p>
+<p>绑定<br>bindService(intent,connection,BIND_AUTO_CREATE);//第二个参数是ServiceConnection的实例，第三个参数是标志位。<br>bindservice是个持久连接</p>
+<p>解绑<br>unbindService(connection);</p>
+<h4 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h4><p>oncreate();onstartCommand();onbind();ondestroy();</p>
+<h4 id="前台服务"><a href="#前台服务" class="headerlink" title="前台服务"></a>前台服务</h4><p>在service的oncreate（）中写一个通知，最后用startForeground()让service变成前台服务。</p>
+<h4 id="IntentService"><a href="#IntentService" class="headerlink" title="IntentService"></a>IntentService</h4><p>服务默认是在主线程中运行，一般来说这样会导致anr。所以在onstartCommand()开子线程，在run()中处理逻辑，然后stopself()关闭。<br>但是有时候会忘记开子线程或忘记调用stopself()方法.intentservice解决了这个问题<br>继承intentservice，覆写onhandlerIntent()方法，<br>startservice(intent);</p>
+
+            </div>
+        </div>
+    </div>
+
+	
+</article>
+
+
+
+
 
 
 </div>
