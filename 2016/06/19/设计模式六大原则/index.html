@@ -7,13 +7,17 @@
 
     
 
-    <title>android开发艺术探索 | 守夜人</title>
+    <title>设计模式六大原则 | 守夜人</title>
     <meta name="author" content="caisen">
+    
+    <meta name="description" content="单一职责原则不要存在多于一个导致类变更的原因，即一个类只负责一项职责。 
+里氏替换原则当使用继承时，遵循里氏替换原则。类B继承类A时，除添加新的方法完成新增功能P2外，尽量不要重写父类A的方法，也尽量不要重载父类A的方法。子类可以扩展父类的功能，但不能改变父类原有的功能
+依赖倒置原则高层模块不应该依">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="设计模式六大原则"/>
     <meta property="og:site_name" content="caisen"/>
 
     
@@ -281,54 +285,72 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper brown darken-1">
         <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/技术/">技术</a><a class="breadcrumb" href="/categories/技术/java/">java</a><a class="breadcrumb" href="/categories/技术/java/Java知识点/">Java知识点</a>
+
 
         
-            <a class="breadcrumb" href="/categories/技术/android/android开发艺术探索/">android开发艺术探索</a>
+
         
     </div>
 </nav>
 
+<article>
+
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>设计模式六大原则</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="light-blue-link-context" datetime="2016-06-19T00:41:56.000Z"><a href="/2016/06/19/设计模式六大原则/">2016-06-19</a></time>
+
+            
+    <div class="tags-row">
         
-            <a href="/2016/05/07/android—动画/" class="collection-item black-text text-darken-1">
-                <time datetime="2016-05-06T21:29:54.000Z">2016-05-07</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                android—动画
-            </a>
+            <a href="/tags/笔记/" class="chip light-blue">笔记</a>
         
-            <a href="/2016/05/06/view的工作原理/" class="collection-item black-text text-darken-1">
-                <time datetime="2016-05-06T00:13:46.000Z">2016-05-06</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                view的工作原理
-            </a>
-        
-            <a href="/2016/04/14/android的消息机制/" class="collection-item black-text text-darken-1">
-                <time datetime="2016-04-14T08:59:27.000Z">2016-04-14</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                android的消息机制
-            </a>
-        
-            <a href="/2016/04/10/view的事件体系/" class="collection-item black-text text-darken-1">
-                <time datetime="2016-04-10T03:00:02.000Z">2016-04-10</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                view的事件体系
-            </a>
-        
-            <a href="/2016/04/07/IPC机制/" class="collection-item black-text text-darken-1">
-                <time datetime="2016-04-06T23:10:44.000Z">2016-04-07</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                IPC机制
-            </a>
+            <a href="/tags/设计模式/" class="chip light-blue">设计模式</a>
         
     </div>
+
+
+            <div class="toc light-blue-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#单一职责原则"><span class="section table-of-contents-text">单一职责原则</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#里氏替换原则"><span class="section table-of-contents-text">里氏替换原则</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#依赖倒置原则"><span class="section table-of-contents-text">依赖倒置原则</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#接口隔离原则"><span class="section table-of-contents-text">接口隔离原则</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#迪米特法则"><span class="section table-of-contents-text">迪米特法则</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#开闭原则"><span class="section table-of-contents-text">开闭原则</span></a></li></ol>
+</div>
+
+
+            <div class="entry light-blue-link-context">
+                <h2 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h2><p>不要存在多于一个导致类变更的原因，即一个类只负责一项职责。 </p>
+<h2 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h2><p>当使用继承时，遵循里氏替换原则。类B继承类A时，除添加新的方法完成新增功能P2外，尽量不要重写父类A的方法，也尽量不要重载父类A的方法。<br>子类可以扩展父类的功能，但不能改变父类原有的功能</p>
+<h2 id="依赖倒置原则"><a href="#依赖倒置原则" class="headerlink" title="依赖倒置原则"></a>依赖倒置原则</h2><p>高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。<br>将类A修改为依赖接口I，类B和类C各自实现接口I，类A通过接口I间接与类B或者类C发生联系，则会大大降低修改类A的几率<br>一个人开始时读报纸，但是忽然要读一本书或者杂志就不行，这明显不行，先定义一个读书的接口，报纸，杂志，书实现读书接口。把接口当作参数放在人的阅读方法中，当一个人要读某种物品的时候直接实例化<br>传递依赖关系有三种方式，以上的例子中使用的方法是接口传递，另外还有两种传递方式：构造方法传递和setter方法传递，<br>面向接口编程</p>
+<h2 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h2><p>客户端不应该依赖它不需要的接口；一个类对另一个类的依赖应该建立在最小的接口上。<br>将臃肿的接口拆分为独立的几个接口，建立单一接口，不要建立庞大臃肿的接口，尽量细化接口，接口中的方法尽量少。也就是采用接口隔离原则。<br>单一职责原则原注重的是职责；而接口隔离原则注重对接口依赖的隔离。其二，单一职责原则主要是约束类，其次才是接口和方法，它针对的是程序中的实现和细节；而接口隔离原则主要约束接口接口，主要针对抽象，针对程序整体框架的构建。</p>
+<h2 id="迪米特法则"><a href="#迪米特法则" class="headerlink" title="迪米特法则"></a>迪米特法则</h2><p>一个对象应该对其他对象保持最少的了解，尽量降低类与类之间的耦合<br>类与类之间的关系越密切，耦合度越大，当一个类发生改变时，对另一个类的影响也越大。</p>
+<h2 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h2><p>一个软件实体如类、模块和函数应该对扩展开放，对修改关闭。<br>当软件需要变化时，尽量通过扩展软件实体的行为来实现变化，而不是通过修改已有的代码来实现变化。<br>用抽象构建框架，用实现扩展细节。</p>
+<p><a href="http://www.uml.org.cn/sjms/201211023.asp" target="_blank" rel="external">参考</a></p>
+
+            </div>
+        </div>
+    </div>
+
+	
+</article>
+
+
+
+
 
 
 </div>
