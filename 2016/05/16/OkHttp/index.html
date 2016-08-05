@@ -174,16 +174,16 @@
         
 
             <li class="collapse-level-2" collapse-level="2">
-                <a class="no-padding" href="/categories/技术/java/Java知识点/">
-                    Java知识点 <span class="right">2 篇</span></a>
+                <a class="no-padding" href="/categories/技术/java/JVM/">
+                    JVM <span class="right">9 篇</span></a>
                 </a>
             </li>
 
         
 
             <li class="collapse-level-2" collapse-level="2">
-                <a class="no-padding" href="/categories/技术/java/JVM/">
-                    JVM <span class="right">9 篇</span></a>
+                <a class="no-padding" href="/categories/技术/java/Java知识点/">
+                    Java知识点 <span class="right">2 篇</span></a>
                 </a>
             </li>
 
@@ -206,16 +206,16 @@
         
 
             <li class="collapse-level-2" collapse-level="2">
-                <a class="no-padding" href="/categories/技术/android/项目/">
-                    项目 <span class="right">3 篇</span></a>
+                <a class="no-padding" href="/categories/技术/android/android开发艺术探索/">
+                    android开发艺术探索 <span class="right">5 篇</span></a>
                 </a>
             </li>
 
         
 
             <li class="collapse-level-2" collapse-level="2">
-                <a class="no-padding" href="/categories/技术/android/android开发艺术探索/">
-                    android开发艺术探索 <span class="right">5 篇</span></a>
+                <a class="no-padding" href="/categories/技术/android/项目/">
+                    项目 <span class="right">3 篇</span></a>
                 </a>
             </li>
 
@@ -230,16 +230,16 @@
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/念/杂/">
-                    杂 <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/念/ToDo/">
+                    ToDo <span class="right">1 篇</span></a>
                 </a>
             </li>
 
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/念/ToDo/">
-                    ToDo <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/念/杂/">
+                    杂 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -351,7 +351,7 @@
 <h2 id="4-为什么用"><a href="#4-为什么用" class="headerlink" title="4.为什么用"></a>4.为什么用</h2><p>相对于httpURLconnection来说，简单方便高效</p>
 <h2 id="5-有什么坏处"><a href="#5-有什么坏处" class="headerlink" title="5.有什么坏处"></a>5.有什么坏处</h2><p>因为OkHttp是基于http协议封装的一套请求客户端，虽然他可以开线程，但是更偏向真正的请求，和HttpUrlConnection的职责是一样的。<br>而切换线程 数据转换 以及没有对请求进行封装，这是需要一个工具来帮助它完成这些事情（出自同门的retrofit很好的解决了这个问题）</p>
 <h2 id="6-有什么改进或者替代的方案"><a href="#6-有什么改进或者替代的方案" class="headerlink" title="6.有什么改进或者替代的方案"></a>6.有什么改进或者替代的方案</h2><p>retrofit切换线程 数据转换 以及没有对请求进行封装</p>
-<h2 id="7-原理是什么"><a href="#7-原理是什么" class="headerlink" title="7.原理是什么"></a>7.原理是什么</h2><p><img src="http://blog.piasy.com/img/201607/okhttp_full_process.png" alt=""><br><a href="http://blog.piasy.com/2016/07/11/Understand-OkHttp/" target="_blank" rel="external">参考</a><br>设计模式：责任链模式<br>1.OkHttpClient 实现 Call.Factory，负责为 Request 创建 Call；</p>
+<h2 id="7-原理是什么"><a href="#7-原理是什么" class="headerlink" title="7.原理是什么"></a>7.原理是什么</h2><p><img src="/2016/05/16/OkHttp/okhttp_full_process.png" alt=""><br><a href="http://blog.piasy.com/2016/07/11/Understand-OkHttp/" target="_blank" rel="external">参考</a><br>设计模式：责任链模式<br>1.OkHttpClient 实现 Call.Factory，负责为 Request 创建 Call；</p>
 <p>2.RealCall 为具体的 Call 实现，其 enqueue() 异步接口通过 Dispatcher 利用 ExecutorService 实现，而最终进行网络请求时和同步 execute() 接口一致，都是通过 getResponseWithInterceptorChain() 函数实现；</p>
 <p>3.getResponseWithInterceptorChain() 中利用 Interceptor 链条，分层实现缓存、透明压缩、网络 IO 等功能；</p>
 
