@@ -1,0 +1,267 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width , initial-scale=1, user-scalable=no">
+    <!-- 
+   增加这句后，可以看到浏览器的DevTools面板的模拟移动设备状态的变化
+  -->
+    <!-- <link rel="stylesheet" href="myCSS.css" >  -->
+    <style>
+        * {
+            margin: 10px;
+            text-align: center;
+        }
+
+        body {
+            position: relative;
+        }
+
+        header {
+            height: 15%;
+            border: 2px solid blue;
+            font-size: 1.6em;
+        }
+
+        main {
+            height: 70%;
+            border: 2px solid blue;
+            font-size: 1.2em;
+            /* background-image: url('../lesson/CS.jpg'); */
+            background-size: cover;
+            position: relative;
+        }
+
+        #bookface {
+            width: 80%;
+            height: 80%;
+            border: 1px solid red;
+            background-color: blanchedalmond;
+            position: absolute;
+            left: 8%;
+            top: 8%;
+        }
+
+        nav {
+            border: 2px solid blue;
+            height: 10%;
+            font-size: 1.1em;
+        }
+
+
+        footer {
+            min-height: 5%;
+            border: 2px solid blue;
+        }
+
+        #aid {
+            position: absolute;
+            left: 600px;
+            top: 0;
+            border: 3px solid blue;
+        }
+
+        #typeText {
+            color: blue;
+            word-break: break-all;
+            border: 1px solid blue;
+            height: 10%;
+            width: 95%;
+        }
+
+        #keyStatus {
+            position: absolute;
+            bottom: 0;
+            border: 1px solid blue;
+            width: 90%;
+            height: 10%;
+        }
+    </style>
+    <title>UI的个性化键盘控制——巧妙应用</title>
+</head>
+
+<body>
+    <header>
+        现代电影赏析
+    </header>
+    <nav>
+        <button>导航一</button>
+        <button>导航二</button>
+        <button>导航三</button>
+    </nav>
+    <main id="main">
+        <div id="bookface">
+            书的封面
+        </div>
+    </main>
+
+    <footer>
+        万一苇 江西科技师范大学 2022--2025
+    </footer>
+
+    <div id="aid">
+        用户键盘响应区
+        <div id="typeText"></div>
+        <div id="keyStatus"></div>
+    </div>
+
+
+    <script>
+        var UI = {};
+        // 设置宽度  如果宽度大于600，就只显示600宽度
+        UI.appWidth = window.innerWidth >= 600 ? 600 : window.innerWidth;
+        // 设置高度
+        UI.appHeight = window.innerHeight;
+        // 基础字体的大小
+        let baseFont = parseInt(UI.appWidth / 20);
+
+        // 设置宽高
+        setBodyStyle(baseFont, UI.appHeight, UI.appWidth);
+        setAidStyle(UI.appWidth, UI.appHeight);
+
+        //尝试对鼠标和触屏同时进行设计UI控制
+        var Pointer = {};
+        Pointer.isDown = false;
+        Pointer.x = 0;
+        Pointer.deltaX = 0;
+        { //Code Block begin
+            const ORIGINAL_LEFT = 8 + '%';
+            const VALID_DRAG_DISTANCE = 100;
+
+
+            let handleBegin = function (ev) {
+                Pointer.isDown = true;
+                // 记录下起始位置
+                Pointer.x = ev.pageX || ev.touches[0].pageX
+                Pointer.y = ev.pageY || ev.touches[0].pageY
+                if (ev.touches) {
+                    console.log("Touch begin : " + "(" + Pointer.x + "," + Pointer.y + ")");
+                    $("bookface").textContent = "触屏事件开始，坐标：" + "(" + Pointer.x + "," + Pointer.y + ")";
+                } else {
+                    console.log("MouseDown at x: " + "(" + Pointer.x + "," + Pointer.y + ")");
+                    $("bookface").textContent = "鼠标按下，坐标：" + "(" + Pointer.x + "," + Pointer.y + ")";
+                }
+            };
+            let handleEnd = function (ev) {
+                Pointer.isDown = false;
+                ev.preventDefault();
+                if (ev.touches) {
+                    $("bookface").textContent = "触屏事件结束!";
+                    if (Math.abs(Pointer.deltaX) > VALID_DRAG_DISTANCE) {
+                        $("bookface").textContent += "，这是有效触屏滑动！";
+                    } else {
+                        $("bookface").textContent += " 本次算无效触屏滑动！";
+                        $("bookface").style.left = ORIGINAL_LEFT;
+                    }
+                } else {
+                    $("bookface").textContent = "鼠标松开!";
+                    if (Math.abs(Pointer.deltaX) > VALID_DRAG_DISTANCE) {
+                        $("bookface").textContent += "，这是有效拖动！";
+                    } else {
+                        $("bookface").textContent += " 本次算无效拖动！";
+                        $("bookface").style.left = ORIGINAL_LEFT;
+                    }
+                }
+            };
+            let handleMoving = function (ev) {
+                ev.preventDefault();
+                if (Pointer.isDown) {
+                    if (ev.touches) {
+                        console.log("Touch is moving");
+                        Pointer.deltaX = parseInt(ev.touches[0].pageX - Pointer.x);
+                        $("bookface").textContent = "正在滑动触屏，滑动距离：" + Pointer.deltaX + "px 。";
+                        $('bookface').style.left = Pointer.deltaX + 'px';
+
+                    } else {
+                        console.log("Pointer isDown and moving");
+                        Pointer.deltaX = parseInt(ev.pageX - Pointer.x);
+                        $("bookface").textContent = "正在拖动鼠标，距离：" + Pointer.deltaX + "px 。";
+                        $('bookface').style.left = Pointer.deltaX + 'px';
+
+                    }
+                }
+
+
+            };
+
+            $("bookface").addEventListener("mousedown", handleBegin);
+            $("bookface").addEventListener("touchstart", handleBegin);
+            $("bookface").addEventListener("mouseup", handleEnd);
+            $("bookface").addEventListener("touchend", handleEnd);
+            $("bookface").addEventListener("mouseout", handleEnd);
+            $("bookface").addEventListener("mousemove", handleMoving);
+            $("bookface").addEventListener("touchmove", handleMoving);
+            $("bookface").addEventListener('click', function (ev) {
+                console.log('本次触发了点击事件：click。');
+            });
+           /*  $("body").addEventListener("keypress", function (ev) {
+                let key = ev.key;
+                $("outputText").textContent += key;
+            }); */
+            // keydown和keyup事件增加ev.preventDefault()以后，键盘keypress事件被阻止
+            $("body").addEventListener("keydown", function(ev) {
+                ev.preventDefault();
+                let key = ev.key;
+                $("keyStatus").textContent = '按下键：' + key;
+            });
+            $("body").addEventListener("keyup", function(ev) {
+                ev.preventDefault();
+                let key = ev.key;
+                $("keyStatus").textContent = key +  "弹起";
+                $("typeText").textContent += key;
+            });
+        } //Code Block  end
+        // 封装一个获取元素的方法
+        function $(element) {
+            if (typeof element !== 'string'
+                || element === ''
+                || element === null
+                || element === undefined) {
+                throw new Error('参数错误');
+            }
+            let dom = document.getElementById(element);
+            if (!dom) {
+                // 如果不存在
+                dom = document.querySelector(element);
+            }
+            if (dom) {
+                return dom;
+            }
+            // 如果不存在，就抛异常
+            throw ('id或选择器不存在');
+        }
+
+        /**
+         * 给body设置样式
+         * @param { number } baseFont 基础字体
+         * @param { number } appHeight 设备高度
+         * @param { number } appWidth 设备宽度
+         */
+        function setBodyStyle(baseFont, appHeight, appWidth) {
+            // 通过修改body对象的字体大小，可以遗传给子代，从而实现自己的响应式设计
+            document.body.style.fontSize = baseFont + 'px';
+            // 把body的高度设置为屏幕的高度，实现了纵向全屏
+            // 通过CSS对body子对象的高度百分比进行分配，从而达到响应式设计的目标。
+            document.body.style.height = appHeight - 70 + 'px';
+            document.body.style.width = appWidth + 'px';
+        }
+
+        /**
+         * 给aid设置样式
+         * @param { number } appHeight 设备高度
+         * @param { number } appWidth 设备宽度
+         */
+        function setAidStyle(appWidth, appHeight) {
+            let aid = $('aid');
+            if (window.innerWidth <= 1000) {
+                aid.style.display = 'none';
+            }
+            aid.style.width = window.innerWidth - appWidth - 30 + 'px';
+            aid.style.height = appHeight - 62 + 'px';
+        }
+    </script>
+</body>
+
+</html>
